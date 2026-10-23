@@ -8,7 +8,7 @@ VonBot is a free, open-source computer simulator designed to help students under
 
 ![VonBot simulator showing the assembly editor, CPU cycle, and RAM](docs/images/vonbot-simulator.png)
 
-## 1. What is VonBot?
+## What is VonBot?
 
 VonBot is a teaching tool for exploring the **Von Neumann architecture**, the idea that a computer stores both instructions and data in memory. Rather than hiding what happens inside a processor, VonBot lets students watch instructions move through the CPU and see their effects on registers, RAM, input, and output.
 
@@ -23,7 +23,7 @@ VonBot is an **educational model**, not a way to run programs written for a real
 
 ![VonBot visual block-coding editor](docs/images/vonbot-block-editor.png)
 
-## 2. How do I install it?
+## How do I install it?
 
 The easiest way to run VonBot for a classroom is with **Docker**. Docker runs the application in a container so you do not have to install Node.js or configure a web server yourself.
 
@@ -75,7 +75,7 @@ docker run -d --name vonbot --restart unless-stopped -p 2003:3000 ghcr.io/shield
 
 **Deployment notes:** VonBot requires no database, sign-in, or student accounts. Individual projects are automatically saved **in each browser**; they are not synchronized across devices. Students should save a copy of important programs using the Project menu before clearing browser data, switching devices, or using shared computers. The server health endpoint is `/api/health`.
 
-## 3. How do I use it?
+## How do I use it?
 
 Start by entering a short assembly program in the **Assembly Editor**, or switch to **Blocks** to build the same program visually. Choose **Assemble into RAM** to load the instructions into the simulated computer.
 
@@ -100,7 +100,7 @@ FIRST:  DAT 0
 
 Use **Project** to save or load program files. Use the **?** button in the simulator to find the available commands. For first-time learners, stepping through a short program is often more useful than immediately pressing Run.
 
-## 4. How can I use this with students?
+## How can I use this with students?
 
 VonBot is intentionally an **open-ended sandbox**: there is no single prescribed lesson, sequence, or correct project. Students can start with adding two numbers and progress to comparisons, branches, loops, reusable data locations, and more complex programs as their understanding grows.
 
@@ -110,7 +110,7 @@ The goal is to add **ready-to-use classroom labs and teacher resources to this r
 
 For classroom deployment, consider testing the server address from a student device before the lesson. Since work is stored in the browser, students should export or save important work rather than relying exclusively on automatic browser storage.
 
-## 5. Credits
+## Credits
 
 **VonBot was created by Tobin Shields** as an educational tool for teaching computer architecture and introductory assembly programming.
 
@@ -119,3 +119,13 @@ The project was inspired by **Peter Higginson's [Little Man Computer (LMC)](http
 **VonBot is an independent project and is not affiliated with, sponsored by, or endorsed by Peter Higginson or the Little Man Computer project.**
 
 VonBot is distributed under the [MIT License](LICENSE).
+
+## Development transparency and security
+
+**VonBot was developed with the assistance of ChatGPT.** Tobin Shields directed the project's design, instructional goals, testing, and revisions, using AI-generated code as part of the development process. This is shared openly so educators and developers can make informed decisions about using the software.
+
+**Security warning:** VonBot has not undergone a comprehensive professional security audit. Its code should **not be considered suitable for public, internet-facing deployment** and should be **assumed to contain vulnerabilities**. Use it only in appropriately isolated, trusted educational environments, with access controls and network protections appropriate to your setting. Do not rely on it to process sensitive student information or provide security boundaries.
+
+Before its initial official release, VonBot went through **22 development versions**. It was developed through meticulous iteration with a strong emphasis on clarity, accessibility, and ease of use. Its interface and instructional behavior were reviewed and battle-tested in classroom use by a computer science teacher and **11th- and 12th-grade students**. Their feedback informed improvements to the workflow and learning experience.
+
+**Classroom testing is not a substitute for independent security review.** The educational testing described above supports its classroom usability, not a claim that it is secure or free of defects.
