@@ -1,0 +1,105 @@
+/* VonBot v0.12: handoff sockets remain vivid while the phase body is subdued. */
+.handoff-card{position:relative!important;overflow:visible!important}
+.handoff-card.phase-dimmed{opacity:1!important;filter:none!important}
+.handoff-card.phase-dimmed .decode-body,.handoff-card.phase-dimmed .execute-body{opacity:.43;filter:grayscale(.78)}
+.handoff-card.phase-emphasis .decode-body,.handoff-card.phase-emphasis .execute-body{opacity:1;filter:none}
+.handoff-slot{position:absolute;top:8px;right:10px;min-height:29px;min-width:74px;max-width:118px;padding:4px 10px;display:flex;align-items:center;justify-content:center;border:2px solid #9ca9b9;border-radius:22px;background:#edf2f5;color:#6a7583;z-index:5;font:900 14px/1.15 ui-monospace,monospace;letter-spacing:.035em;white-space:nowrap;transition:background .2s,border-color .2s,box-shadow .2s,color .2s}
+.decode-inbox.is-loaded{background:#d7fae7;border-color:#0aa866;color:#07623d;box-shadow:0 0 0 3px #14cb8242,0 0 14px #0fca8277;animation:handoff-glow-green 1.6s ease-in-out infinite}
+.execute-inbox.is-loaded{background:#fff0ba;border-color:#ed9c00;color:#6f4700;box-shadow:0 0 0 3px #ffd55460,0 0 13px #ffbf3988;animation:handoff-glow-yellow 1.6s ease-in-out infinite}
+.decode-body > .MuiStack-root:first-child{padding-right:99px;min-height:24px}
+.execute-body > .MuiStack-root:first-child{padding-right:112px!important;min-height:24px}
+.execute-body > .MuiStack-root:first-child .MuiChip-root{display:none}
+@keyframes handoff-glow-green{50%{box-shadow:0 0 0 5px #14cb822a,0 0 22px #0fca8299}}
+@keyframes handoff-glow-yellow{50%{box-shadow:0 0 0 5px #ffd55430,0 0 22px #ffb91d99}}
+@media(prefers-reduced-motion:reduce){.handoff-slot.is-loaded{animation:none}}
+/* The speed slider is always editable, even while Run animates. */
+.editor-settings{align-items:center}
+.speed-slider{min-width:115px;flex:1;border:1px solid #d6e1eb;border-radius:9px;background:#fff;padding:3px 10px 0;min-height:44px}
+.speed-slider .MuiSlider-root{padding:4px 0 8px;margin:0}
+.editor-settings>.MuiFormControl-root{min-width:100px;flex:1}
+/* Segmented opcode/operand display: each two-digit decimal part maps to 7 binary digits. */
+.encoded-word{display:inline-flex;align-items:center;justify-content:center;gap:1px;font-family:ui-monospace,monospace;font-weight:900;font-variant-numeric:tabular-nums;white-space:nowrap;line-height:1.05}
+.encoded-word .word-opcode{color:#075baf}
+.encoded-word .word-operand{color:#a13bd1}
+.memory-cell .val{padding-top:10px;letter-spacing:0}
+.memory-cell .binary-word{display:flex;flex-direction:column;gap:2px;font-size:clamp(8px,.75vw,12px);letter-spacing:.012em;line-height:1.06}
+.memory-cell .decimal-word{font-size:clamp(12px,.95vw,16px)}
+.memory-cell .encoded-word .word-opcode{background:#d9edff;border-radius:2px;padding:0 1px}
+.memory-cell .encoded-word .word-operand{background:#f8ddff;border-radius:2px;padding:0 1px}
+.memory-cell.empty .encoded-word .word-opcode{color:#a3d5ff;background:#0d3f6c}
+.memory-cell.empty .encoded-word .word-operand{color:#f7c0ff;background:#583173}
+.memory-cell .addr{font-size:9px}
+.memory-panel .MuiToggleButton-root.Mui-selected{color:#0e5b9e;background:#d8edff}
+/* The accessibility options are mutually exclusive (one theme attribute on the app root). */
+.app-root[data-accessibility='colorblind']{--von-op:#004ca5;--von-operand:#ad5200}
+.app-root[data-accessibility='colorblind'] .word-opcode{color:#004ca5}
+.app-root[data-accessibility='colorblind'] .word-operand{color:#a85300}
+.app-root[data-accessibility='colorblind'] .encoded-word .word-opcode{background:#d5e9ff}
+.app-root[data-accessibility='colorblind'] .encoded-word .word-operand{background:#ffecbb}
+.app-root[data-accessibility='colorblind'] .stage-tab.stage-fetch.is-active{background:#0059b3;color:white}
+.app-root[data-accessibility='colorblind'] .stage-tab.stage-decode.is-active{background:#008e88;color:white}
+.app-root[data-accessibility='colorblind'] .stage-tab.stage-execute.is-active{background:#ffc043;color:#382600}
+.app-root[data-accessibility='colorblind'] .decode-inbox.is-loaded{background:#b9eee9;border-color:#008f85;color:#064b49;box-shadow:0 0 0 3px #008e8855,0 0 14px #008e88}
+.app-root[data-accessibility='colorblind'] .execute-inbox.is-loaded{background:#fff0c1;border-color:#ae6000;color:#734200}
+.app-root[data-accessibility='colorblind'] .rail-lit{filter:drop-shadow(0 0 6px #008fe9)}
+.app-root[data-accessibility='colorblind'] .memory-cell.dat{background:#a8e4d4;color:#104f4a}
+.app-root[data-accessibility='colorblind'] .memory-cell.data{background:#ffe19c;color:#663b02}
+.app-root[data-accessibility='high-contrast']{background:#07121f!important;color:#f9fafc}
+.app-root[data-accessibility='high-contrast'] .project-toolbar{background:#0c1d2d!important;color:#fff}
+.app-root[data-accessibility='high-contrast'] .top-bar{background:#07111b!important}
+.app-root[data-accessibility='high-contrast'] .editor-panel,.app-root[data-accessibility='high-contrast'] .memory-panel,.app-root[data-accessibility='high-contrast'] .teaching-card,.app-root[data-accessibility='high-contrast'] .memory-inner,.app-root[data-accessibility='high-contrast'] .speed-slider{background:#132539!important;color:#fff!important;border:2px solid #c1dafa!important}
+.app-root[data-accessibility='high-contrast'] .teaching-card .MuiTypography-root,.app-root[data-accessibility='high-contrast'] .stage-explanation,.app-root[data-accessibility='high-contrast'] .execution-detail,.app-root[data-accessibility='high-contrast'] .decode-register span{color:#fafcff!important}
+.app-root[data-accessibility='high-contrast'] .decode-body .decode-register,.app-root[data-accessibility='high-contrast'] .accumulator-box,.app-root[data-accessibility='high-contrast'] .fetch-message,.app-root[data-accessibility='high-contrast'] .execution-detail,.app-root[data-accessibility='high-contrast'] .stage-explanation{background:#1b3450!important;color:#fff!important;border:1px solid #c7ddff!important}
+.app-root[data-accessibility='high-contrast'] .decode-register strong,.app-root[data-accessibility='high-contrast'] .accumulator-box strong{background:#06111d!important;color:#fff!important}
+.app-root[data-accessibility='high-contrast'] .memory-cell.empty{background:#090f18;color:#fff;border:1px solid #869bad}
+.app-root[data-accessibility='high-contrast'] .memory-cell.code{background:#142e4d;color:#fff;border:1px solid #36afff}
+.app-root[data-accessibility='high-contrast'] .memory-cell.dat{background:#154238;color:#fff;border:1px solid #55e8c0}
+.app-root[data-accessibility='high-contrast'] .memory-cell.data{background:#4a310c;color:#fff;border:1px solid #ffe26c}
+.app-root[data-accessibility='high-contrast'] .word-opcode{color:#38d7ff!important;background:#06283e!important}
+.app-root[data-accessibility='high-contrast'] .word-operand{color:#ffe877!important;background:#453608!important}
+.app-root[data-accessibility='high-contrast'] .stage-tab.stage-fetch.is-active{background:#065cce;color:#fff}
+.app-root[data-accessibility='high-contrast'] .stage-tab.stage-decode.is-active{background:#006d52;color:#fff}
+.app-root[data-accessibility='high-contrast'] .stage-tab.stage-execute.is-active{background:#fbc223;color:#1f1600}
+.app-root[data-accessibility='high-contrast'] .stage-tab.is-muted{background:#1c2a3b!important;color:#f9fafb!important;opacity:.75;filter:none}
+.app-root[data-accessibility='high-contrast'] .handoff-slot:not(.is-loaded){background:#0e1e31;color:#eee;border-color:#a7bacb}
+.app-root[data-accessibility='high-contrast'] .decode-inbox.is-loaded{background:#004b36;color:#fff;border-color:#46ffb1}
+.app-root[data-accessibility='high-contrast'] .execute-inbox.is-loaded{background:#514000;color:#fff;border-color:#ffe066}
+.app-root[data-accessibility='high-contrast'] .handoff-card.phase-dimmed .decode-body,.app-root[data-accessibility='high-contrast'] .handoff-card.phase-dimmed .execute-body{opacity:.72;filter:none}
+.app-root[data-accessibility='high-contrast'] .rail-base{stroke:#9cbad2;opacity:.9}
+.app-root[data-accessibility='high-contrast'] .register-display{background:#183252!important;color:white!important;border-color:#c1dafa!important}
+.app-root[data-accessibility='high-contrast'] .register-display strong{background:#091525;color:#fff}
+
+.execute-body{display:flex;flex:1;min-height:0;flex-direction:column}
+
+/* A receiving field is visually independent from its muted phase. */
+.decode-card.handoff-card.phase-dimmed{background:#eaf0f1!important;border-left-color:#a6bcb6!important}
+.execute-card.handoff-card.phase-dimmed{background:#f0f2f4!important;border-left-color:#b8c0c9!important}
+.handoff-slot .encoded-word{font-size:14px;gap:0}
+.handoff-slot .encoded-word.binary-word{font-size:10px;line-height:1.03;gap:2px}
+.handoff-slot:has(.binary-word){min-width:104px;max-width:120px;padding:3px 7px;top:4px}
+.decode-register .word-opcode{color:#075baf}
+.decode-register .word-operand{color:#a13bd1}
+.decode-register .binary-part{font-size:10.5px;letter-spacing:-.02em;padding:5px 3px;min-width:61px}
+.app-root[data-accessibility='colorblind'] .decode-register .word-opcode{color:#005eac}
+.app-root[data-accessibility='colorblind'] .decode-register .word-operand{color:#975000}
+.app-root[data-accessibility='high-contrast'] .decode-register .word-opcode{color:#38d7ff!important}
+.app-root[data-accessibility='high-contrast'] .decode-register .word-operand{color:#ffe877!important}
+/* Extend the high-contrast palette into editor, block mode and I/O. */
+.app-root[data-accessibility='high-contrast'] .editor-area,.app-root[data-accessibility='high-contrast'] .cm-editor,.app-root[data-accessibility='high-contrast'] .cm-scroller,.app-root[data-accessibility='high-contrast'] .cm-gutters{background:#0e1e30!important;color:#f6faff!important}
+.app-root[data-accessibility='high-contrast'] .cm-content,.app-root[data-accessibility='high-contrast'] .cm-line{color:#f6faff!important}
+.app-root[data-accessibility='high-contrast'] .editor-heading .MuiTypography-root,.app-root[data-accessibility='high-contrast'] .project-toolbar .MuiTypography-root{color:#fff!important}
+.app-root[data-accessibility='high-contrast'] .teaching-io>.MuiCard-root{background:#142b47!important;border:2px solid #b0cdf1!important}
+.app-root[data-accessibility='high-contrast'] .teaching-io .MuiTypography-root{color:#fff!important}
+.app-root[data-accessibility='high-contrast'] .console{background:#061523!important;color:#fff!important;border:1px solid #c1dafa}
+.app-root[data-accessibility='high-contrast'] .memory-panel .MuiTypography-root{color:#fff!important}
+.app-root[data-accessibility='high-contrast'] .memory-panel .row-heading{color:#fff!important}
+.app-root[data-accessibility='high-contrast'] .speed-slider .MuiTypography-root{color:#fff!important}
+.app-root[data-accessibility='high-contrast'] .speed-slider .MuiSlider-root{color:#ffe077!important}
+.app-root[data-accessibility='high-contrast'] .speed-slider{background:#0b2136!important}
+.app-root[data-accessibility='high-contrast'] .ram-usage-meter{background:#081729!important;border-color:#d1ebff!important}
+.app-root[data-accessibility='high-contrast'] .ram-usage-meter .MuiTypography-root{color:#fff!important}
+.app-root[data-accessibility='high-contrast'] .blocks-overlay,.app-root[data-accessibility='high-contrast'] .blocks-layout,.app-root[data-accessibility='high-contrast'] .blocks-categories,.app-root[data-accessibility='high-contrast'] .blocks-flyout,.app-root[data-accessibility='high-contrast'] .blocks-workspace{background:#11253a!important;color:#fff!important}
+.app-root[data-accessibility='high-contrast'] .blocks-title,.app-root[data-accessibility='high-contrast'] .workspace-heading .MuiTypography-root{color:#fff!important}
+.app-root[data-accessibility='colorblind'] .input-card.input-needs-value{border-color:#0063c3!important;box-shadow:0 0 0 5px #0063c344!important}
+
+.memory-grid .memory-cell{height:clamp(38px,calc((100dvh - 240px) / var(--ram-rows, 10)),75px)}

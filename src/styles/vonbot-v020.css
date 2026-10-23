@@ -1,0 +1,57 @@
+/* v0.20 - speed feedback, ALU readability, and full-animation pause. */
+.speed-slider.turbo-active{
+  background:#ffe5e7!important;border:2px solid #c51f39!important;
+  color:#8c122b!important;animation:turbo-speed-pulse 1.15s ease-in-out infinite;
+}
+.speed-slider.turbo-active .MuiTypography-root,.speed-slider.turbo-active .MuiSvgIcon-root{color:#a71831!important}
+.speed-slider.turbo-active .MuiSlider-root{color:#c51f39!important}
+@keyframes turbo-speed-pulse{0%,100%{box-shadow:0 0 0 0 #df233e62}50%{box-shadow:0 0 0 6px #df233e4d,0 0 12px 2px #d733475c}}
+/* Keep the ALU equation over both the moving token and the illuminated wire.
+   The upper animation SVG is z=15 and the CPU cards had z=3. */
+.execute-card.phase-emphasis{z-index:23!important;overflow:visible!important}
+.execute-card.phase-emphasis .alu-box{z-index:25!important;overflow:visible!important}
+.execute-card .alu-box .alu-equation{z-index:26!important;isolation:isolate}
+/* Pause freezes CSS pulses and spinners as well as the SVG animation clock. */
+.app-root.simulation-paused *, .app-root.simulation-paused *::before, .app-root.simulation-paused *::after{
+  animation-play-state:paused!important;transition-duration:0s!important;
+}
+/* Three distinct dot stages, with the comparison value displayed after thinking. */
+.alu-equation .alu-value-slot.branch-thinking-dots{letter-spacing:.12em;min-width:49px;text-align:center}
+@media(prefers-reduced-motion:reduce){.speed-slider.turbo-active{animation:none!important;box-shadow:0 0 0 3px #c51f39!important}}
+.app-root[data-accessibility='high-contrast'] .speed-slider.turbo-active{background:#5d0717!important;border-color:#fff4a6!important;color:white!important}
+
+/* Portaled popup is an immediate child of the workspace: above z=15 animated
+   rails without lifting the entire CPU card (which would hide the orbs). */
+.workspace-layout>.alu-popup-portal{position:absolute!important;z-index:80!important;pointer-events:none;width:max-content;max-width:250px;}
+.alu-popup-portal .alu-equation{
+  position:relative!important;inset:auto!important;left:auto!important;right:auto!important;
+  top:auto!important;bottom:auto!important;z-index:81!important;display:flex!important;
+  max-width:min(245px,22vw)!important;min-width:135px!important;
+  transform-origin:left center!important;
+}
+.alu-popup-portal .alu-equation::before{
+  content:'';position:absolute;top:16px;left:-12px;border-top:9px solid transparent;
+  border-bottom:9px solid transparent;border-right:11px solid #9d60f1;
+}
+/* Immutable card footprints: changing phase, labels, or equations no longer
+   changes a card's vertical size or pushes the input/output cards down. */
+.teaching-flow>.fetch-card{flex:0 0 clamp(112px,15dvh,147px)!important;height:clamp(112px,15dvh,147px)!important;min-height:0!important}
+.teaching-flow>.decode-card{flex:0 0 clamp(131px,18dvh,169px)!important;height:clamp(131px,18dvh,169px)!important;min-height:0!important}
+.teaching-flow>.execute-card{flex:1 1 0!important;min-height:0!important;height:auto!important}
+.teaching-flow>.stage-tabs,.teaching-flow>.cycle-status-banner{flex:0 0 52px!important;min-height:52px!important;max-height:52px!important}
+.teaching-flow>.teaching-io{flex:0 0 105px!important;min-height:105px!important}
+.teaching-card{box-sizing:border-box!important}
+.teaching-flow .execute-main{min-height:0!important;overflow:hidden}
+@media(max-height:720px) and (min-width:1091px){
+ .teaching-flow>.fetch-card{flex-basis:112px!important;height:112px!important}
+ .teaching-flow>.decode-card{flex-basis:131px!important;height:131px!important}
+ .teaching-flow>.stage-tabs,.teaching-flow>.cycle-status-banner{flex-basis:48px!important;min-height:48px!important;max-height:48px!important}
+ .teaching-flow>.teaching-io{flex-basis:90px!important;min-height:90px!important}
+}
+@media(max-width:1090px){
+ .teaching-flow>.fetch-card,.teaching-flow>.decode-card,.teaching-flow>.execute-card{height:auto!important;flex-shrink:0!important}
+}
+
+.app-root[data-accessibility='high-contrast'] .speed-slider.turbo-active .MuiTypography-root,
+.app-root[data-accessibility='high-contrast'] .speed-slider.turbo-active .MuiSvgIcon-root{color:#fff!important}
+.app-root[data-accessibility='high-contrast'] .speed-slider.turbo-active .MuiSlider-root{color:#fff4a6!important}

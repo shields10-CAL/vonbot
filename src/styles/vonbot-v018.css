@@ -1,0 +1,24 @@
+/* v0.18 — compact PC, legible ALU socket operands, experimental RAM. */
+.fetch-card .pc-display{display:grid!important;grid-template-columns:17px minmax(0,1fr) auto!important;gap:5px!important;padding:6px!important;}
+.fetch-card .pc-display .register-label{font-size:clamp(9px,.92vw,12px)!important;white-space:nowrap!important;overflow-wrap:normal!important;line-height:1.1!important;letter-spacing:-.02em!important;}
+.fetch-card .pc-display .register-hint{font-size:9px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;line-height:1.15!important;}
+.fetch-card .pc-display>strong{min-width:36px!important;font-size:clamp(19px,1.9vw,27px)!important;padding:3px 4px!important;}
+.fetch-card .pc-display svg{width:15px;height:15px;}
+.alu-equation{max-width:unset!important;min-width:0!important;right:-4px!important;bottom:calc(100% + 10px)!important;padding:7px 9px!important;}
+.alu-equation-text{gap:4px!important;display:flex!important;align-items:center!important;white-space:nowrap!important;}
+.alu-value-slot{font:900 clamp(10px,.90vw,14px) ui-monospace,monospace;letter-spacing:.015em;padding:5px 6px;min-width:31px;text-align:center;border-radius:6px;background:#e0e7f4;color:#183f69;box-shadow:inset 0 2px 4px #12304a24;border:1px solid #a9bad0;display:inline-flex;align-items:center;justify-content:center;}
+.alu-value-slot.value-acc{background:#d6eafb;color:#174d7e;}
+.alu-value-slot.value-memory{background:#efe0ff;color:#64328f;}
+.alu-value-slot.constant{background:#ede7f4;color:#5a4083;}
+.alu-value-slot.value-result{background:#ddf7e6;color:#076e39;border-color:#8bcdaa;}
+.alu-value-slot.comparison-true{color:#086a39;background:#d3f9e0;border-color:#60bb8c;}
+.alu-value-slot.comparison-false{color:#9e1831;background:#ffe2e6;border-color:#e9a0ad;}
+.alu-operator{font:900 13px ui-monospace,monospace;color:#4a5364;flex-shrink:0;}
+.alu-comparison-label{font:700 10px system-ui,sans-serif;color:#654e83;}
+.execution-detail{gap:5px!important;}
+.pc-update-caption{border-top:1px solid #cda963;color:#825514;padding-top:5px!important;}
+.memory-cell.unaddressable{background:repeating-linear-gradient(135deg,#e5e9ed 0 6px,#cdd7df 6px 12px)!important;color:#6f7f8a!important;border:1px dashed #a5b3c3!important;cursor:not-allowed!important;opacity:.82;}
+.memory-cell.unaddressable:hover{transform:none;box-shadow:none;}
+.reserved-label{font-size:16px!important;color:#647c8b;}
+.editor-controls>.MuiButton-outlined:first-child{align-self:flex-start;font-size:11px;font-weight:750;padding:4px 8px;min-height:27px;}
+@media(max-width:1300px){.fetch-card .pc-display .register-label{font-size:10px!important}.alu-value-slot{min-width:25px;padding:4px 5px}.alu-equation-text{gap:3px!important;}}

@@ -1,0 +1,76 @@
+/* v0.19: right-side ALU calculation; consistent execution descriptions; Turbo */
+.execute-card .execution-detail,
+.execute-card .execution-detail-consistent{
+  background:#fff1c6!important;
+  border:1px solid #f3d78e!important;
+  color:#3f321c!important;
+  border-radius:10px!important;
+  min-height:64px;
+}
+.execute-card .execution-detail .MuiTypography-root{color:inherit!important}
+.alu-box .alu-equation{
+  top:auto!important;
+  bottom:0!important;
+  left:calc(100% + 14px)!important;
+  right:auto!important;
+  transform-origin:left center!important;
+  width:max-content!important;
+  min-width:142px!important;
+  max-width:clamp(165px,16vw,260px)!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  z-index:45!important;
+}
+.alu-box .alu-equation::before{
+  content:'';position:absolute;top:16px;left:-12px;width:0;height:0;
+  border-top:9px solid transparent;border-bottom:9px solid transparent;
+  border-right:11px solid #9d60f1;
+}
+.alu-equation .alu-equation-text{white-space:normal!important;flex-wrap:wrap!important;justify-content:center!important;}
+.alu-equation .branch-processing-icon{color:#7a4dc3;flex:none;animation:vonbot-check-turn 850ms linear infinite}
+@keyframes vonbot-check-turn{to{transform:rotate(360deg)}}
+/* The popup belongs only to an active Execute calculation. */
+.teaching-flow:has(.cycle-status-banner) .alu-equation{display:none!important}
+/* Let keyboard and pointer input reach the slider; overlay only conveys status. */
+.speed-slider{position:relative}
+.turbo-popover{position:absolute;z-index:20;right:5px;bottom:calc(100% + 9px);background:#142840;color:#fff;
+  padding:6px 10px;border-radius:8px;box-shadow:0 3px 13px #0b253b45;
+  font-size:11px;font-weight:900;letter-spacing:.02em;pointer-events:none;white-space:nowrap;}
+.turbo-popover::after{content:'';position:absolute;right:12px;top:100%;border:6px solid transparent;border-top-color:#142840}
+.inline-comments-toggle{margin:0 8px 0 auto!important;white-space:nowrap}
+.inline-comments-toggle .MuiFormControlLabel-label{font-size:12px;font-weight:750}
+.comment-toolbox-block{border:2px dashed #b2f0cd!important;box-shadow:none!important}
+.block-bottom-drop.drop-zone-compact{min-height:23px;padding:1px;margin:8px 0 0;border:1px dashed transparent;background:transparent;font-size:0}
+.block-bottom-drop.drop-zone-compact:hover{border-color:#7fa3d1;background:#eaf2fb}
+/* WCAG-inspired theme mappings: maintain contrast and distinguish state with edges and texture. */
+.app-root[data-accessibility='colorblind'] .stage-tab.stage-fetch.is-active{background:#005a9c!important;color:#fff!important;border:2px solid #eef8ff}
+.app-root[data-accessibility='colorblind'] .stage-tab.stage-decode.is-active{background:#007c70!important;color:#fff!important;border:2px dashed #002c36}
+.app-root[data-accessibility='colorblind'] .stage-tab.stage-execute.is-active{background:#ffd05e!important;color:#352100!important;border:2px solid #8d5000}
+.app-root[data-accessibility='colorblind'] .memory-cell.code{background:#d8ebff!important;color:#053760!important;border:2px solid #0072b2!important}
+.app-root[data-accessibility='colorblind'] .memory-cell.dat{background:#c6e8df!important;color:#064236!important;border:2px dashed #007c70!important}
+.app-root[data-accessibility='colorblind'] .memory-cell.data{background:#ffe1ad!important;color:#582d04!important;border:2px dotted #b35600!important}
+.app-root[data-accessibility='colorblind'] .memory-cell.active{outline:3px solid #262424!important;outline-offset:1px}
+.app-root[data-accessibility='colorblind'] .word-opcode{color:#004b8d!important}
+.app-root[data-accessibility='colorblind'] .word-operand{color:#753500!important}
+.app-root[data-accessibility='colorblind'] .execute-card .execution-detail{background:#fff3d3!important;color:#4f2600!important;border:2px solid #b87318!important}
+.app-root[data-accessibility='colorblind'] .alu-equation{background:#fff4cf!important;color:#473000!important;border-color:#aa5700!important}
+.app-root[data-accessibility='colorblind'] .alu-equation::before{border-right-color:#aa5700!important}
+.app-root[data-accessibility='colorblind'] .branch-processing-icon{color:#005a9c!important}
+.app-root[data-accessibility='high-contrast'] .execute-card .execution-detail{background:#0b243b!important;color:#f7fbff!important;border:2px solid #f7c65b!important}
+.app-root[data-accessibility='high-contrast'] .alu-equation{background:#0a1624!important;border:2px solid #fff0af!important;color:#f7fbff!important;box-shadow:0 0 0 2px #000!important}
+.app-root[data-accessibility='high-contrast'] .alu-equation::before{border-right-color:#fff0af!important}
+.app-root[data-accessibility='high-contrast'] .alu-value-slot{background:#142f49!important;color:#fff!important;border:1px solid #d9eaff!important}
+.app-root[data-accessibility='high-contrast'] .alu-value-slot.comparison-true{background:#074c31!important;color:#fff!important;border:2px solid #88ffbb!important}
+.app-root[data-accessibility='high-contrast'] .alu-value-slot.comparison-false{background:#641b23!important;color:#fff!important;border:2px dashed #ff9c99!important}
+.app-root[data-accessibility='high-contrast'] .alu-operator{color:#fff0b0!important}
+.app-root[data-accessibility='high-contrast'] .branch-processing-icon{color:#fff0b0!important}
+.app-root[data-accessibility='high-contrast'] .memory-cell.code{border:2px solid #64beff!important}
+.app-root[data-accessibility='high-contrast'] .memory-cell.dat{border:2px dashed #75f8c2!important}
+.app-root[data-accessibility='high-contrast'] .memory-cell.data{border:2px dotted #ffe077!important}
+.app-root[data-accessibility='high-contrast'] .stage-tab.is-muted{opacity:1!important;border:2px solid #98b4d0!important}
+.app-root[data-accessibility='high-contrast'] button:focus-visible,
+.app-root[data-accessibility='high-contrast'] input:focus-visible{outline:3px solid #ffe077!important;outline-offset:2px!important}
+.app-root[data-accessibility='high-contrast'] .turbo-popover{background:#fff0af;color:#07121f;border:2px solid #000}
+/* Fit the popup beside ALU on narrower MacBook displays. */
+@media(max-width:1350px){.alu-box .alu-equation{max-width:clamp(143px,14vw,195px)!important}.alu-equation .alu-value-slot{padding:3px 4px;min-width:23px;font-size:10px}}
+@media(prefers-reduced-motion:reduce){.branch-processing-icon,.alu-equation{animation:none!important}}

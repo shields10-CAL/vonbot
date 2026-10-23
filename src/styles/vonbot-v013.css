@@ -1,0 +1,31 @@
+/* v0.13: explicit phase handoffs, instructional execution, and accessible focus */
+.fetch-card .fetch-upper{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.fetch-card .control-unit{display:flex;align-items:center;gap:6px;min-width:0;max-width:53%;background:#fff;border:1px solid #b5d6ff;border-radius:10px;padding:8px;color:#165e9d}
+.fetch-card .control-unit .MuiTypography-root{line-height:1.12}
+.decode-card .decode-body{padding-top:3px}
+.decode-split-port{position:relative;margin:2px auto 6px;display:flex;align-items:center;justify-content:space-around;max-width:66%;min-height:18px;border-top:2px solid #57ad8d;border-radius:7px 7px 0 0;color:#1a7858;opacity:.88}
+.decode-split-port span{font-size:9px;font-weight:800}
+.decode-registers{gap:10px}
+.decode-opcode-chip{background:#07865c!important;color:white!important;font-size:12px!important;font-weight:900!important}
+.decode-explanation{display:flex;align-items:center;gap:8px}
+.execute-body.await-command{opacity:.38!important;filter:grayscale(.8)!important}
+.stages-halted .stage-tab{background:#a3162c!important;color:white!important;filter:none!important;opacity:1!important;box-shadow:0 0 0 2px #ffb5bd inset!important}
+.stages-halted .stage-step{color:#8e1826!important}
+.input-focus-overlay{position:fixed;inset:0;z-index:120;pointer-events:none}
+.input-focus-scrim{position:fixed;pointer-events:none}
+.input-focus-ring{position:fixed;border:3px solid #af63ff;border-radius:19px;box-shadow:0 0 0 3px #ffffff,0 0 21px 6px #b56aff,0 0 42px 12px #973aff99;animation:vonbot-input-ring 1.3s ease-in-out infinite;pointer-events:none}
+@keyframes vonbot-input-ring{0%,100%{box-shadow:0 0 0 2px #fff,0 0 12px 3px #b56aff}50%{box-shadow:0 0 0 3px #fff,0 0 24px 11px #b56aff,0 0 35px 15px #973aff99}}
+.middle-panel,.teaching-flow,.teaching-io{overflow:visible!important}
+.input-card.input-needs-value{overflow:visible!important;animation:input-card-pulse 1.12s ease-in-out infinite}
+.warning-strip{max-height:98px;overflow:auto}
+.blocks-workspace{position:relative!important}
+.block-link-wires{position:absolute;left:0;top:0;width:100%;height:100%;z-index:2;pointer-events:none;overflow:visible}
+.block-link-wires path{fill:none;stroke:#0b83c1;stroke-width:3.5;stroke-linecap:round;filter:drop-shadow(0 0 2px #4ac5ff)}
+.block-stack-row{position:relative;z-index:3}
+.branch-port{color:white;background:#064f70;border:2px solid #cbffff;border-radius:50%;height:24px;min-width:24px;cursor:crosshair;font-size:16px;line-height:17px;box-shadow:0 0 0 1px #116585}
+.branch-port.link-selected{background:#ffbb24;box-shadow:0 0 0 4px #ffe0878a}
+.label-connection{min-width:13px;width:13px;height:13px;border:2px solid #0083ac;background:#c5f5ff;border-radius:50%;padding:0;cursor:crosshair;flex-shrink:0}
+.block-label-socket.link-target{outline:2px dashed #0083ac;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){.input-focus-ring{animation:none}}
+
+.teaching-flow.is-halted .teaching-card{border-left-color:#b71c32!important;box-shadow:0 0 0 2px #e75a6440 inset!important}

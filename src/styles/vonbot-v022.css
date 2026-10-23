@@ -1,0 +1,133 @@
+/* VonBot v0.22: Fetch/Decode geometry and ALU equation alignment.
+   Loaded after v0.21 to consolidate the older, conflicting compact rules.
+   Retain the existing theme/color and phase opacity rules. */
+
+/* FETCH: reserve real vertical space for each row.  The earlier 112px card
+   could fit the two controls OR the description, causing the message to cross
+   the card's bottom border when the viewport was short. */
+.teaching-flow > .fetch-card {
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:flex-start!important;
+  gap:4px!important;
+  box-sizing:border-box!important;
+  flex:0 0 clamp(157px, 18dvh, 180px)!important;
+  height:clamp(157px, 18dvh, 180px)!important;
+  min-height:157px!important;
+  padding:9px 10px!important;
+}
+.teaching-flow > .fetch-card > .MuiStack-root:first-child {
+  flex:0 0 23px!important;
+  min-height:23px!important;
+  margin-bottom:0!important;
+}
+.teaching-flow .fetch-card .fetch-rail-space {
+  flex:0 0 13px!important;
+  min-height:13px!important;
+  height:13px!important;
+}
+.teaching-flow .fetch-card .fetch-upper {
+  flex:0 0 auto!important;
+  min-height:55px!important;
+  gap:9px!important;
+  align-items:stretch!important;
+}
+.teaching-flow .fetch-card .pc-display,
+.teaching-flow .fetch-card .control-unit {
+  min-height:55px!important;
+  height:auto!important;
+}
+.teaching-flow .fetch-card .fetch-message {
+  display:flex!important;
+  align-items:center!important;
+  flex:1 1 auto!important;
+  min-height:29px!important;
+  max-height:none!important;
+  box-sizing:border-box!important;
+  margin:0!important;
+  padding:5px 9px!important;
+  position:relative!important;
+  overflow:hidden!important;
+}
+.teaching-flow .fetch-card .fetch-message .MuiTypography-root {
+  line-height:1.25!important;
+  margin:0!important;
+}
+
+/* DECODE: a genuine, elongated T with its stem inside the gap BETWEEN the
+   title/receiving inbox and the registers.  The junction expands to take the
+   available room, pushing both registers and their explanation downward. */
+.teaching-flow > .decode-card {
+  display:block!important;
+  flex:0 0 clamp(177px, 22dvh, 205px)!important;
+  height:clamp(177px, 22dvh, 205px)!important;
+  min-height:177px!important;
+  box-sizing:border-box!important;
+  padding:9px 10px!important;
+}
+.teaching-flow > .decode-card .decode-body {
+  display:flex!important;
+  flex-direction:column!important;
+  min-height:0!important;
+  height:100%!important;
+  overflow:hidden!important;
+}
+.teaching-flow .decode-body > .MuiStack-root:first-child {
+  min-height:26px!important;
+  flex:0 0 26px!important;
+  margin-bottom:0!important;
+}
+.teaching-flow .decode-rail-junction {
+  display:block!important;
+  position:relative!important;
+  width:12px!important;
+  height:auto!important;
+  min-height:34px!important;
+  flex:1 1 34px!important;
+  margin:0 auto!important;
+  padding:0!important;
+}
+.teaching-flow .decode-registers {
+  flex:0 0 44px!important;
+  height:44px!important;
+  min-height:44px!important;
+  margin:0!important;
+}
+.teaching-flow .decode-register {
+  height:44px!important;
+  min-height:44px!important;
+}
+.teaching-flow .decode-explanation {
+  flex:0 0 auto!important;
+  min-height:35px!important;
+  height:auto!important;
+  max-height:46px!important;
+  margin:7px 0 0!important;
+  padding:5px 8px!important;
+}
+
+/* Keep I/O visible on a smaller laptop. If the viewport cannot fit the real
+   content, scroll the middle column instead of rendering content across cards. */
+@media (min-width:1091px) and (max-height:790px) {
+  .teaching-flow > .fetch-card {height:151px!important;flex-basis:151px!important;min-height:151px!important;}
+  .teaching-flow > .decode-card {height:170px!important;flex-basis:170px!important;min-height:170px!important;}
+  .teaching-flow .decode-rail-junction {min-height:28px!important;flex-basis:28px!important;}
+}
+@media (min-width:1091px) and (max-height:700px) {
+  .middle-panel {overflow-y:auto!important;overflow-x:visible!important;}
+  .teaching-flow {height:auto!important;min-height:650px!important;}
+}
+@media (max-width:1090px) {
+  .teaching-flow > .fetch-card,
+  .teaching-flow > .decode-card {height:auto!important;flex:0 0 auto!important;}
+  .teaching-flow > .fetch-card {min-height:157px!important;}
+  .teaching-flow > .decode-card {min-height:177px!important;}
+  .teaching-flow .decode-rail-junction {min-height:38px!important;flex-basis:38px!important;}
+}
+
+/* The portal itself is positioned by the bounding box of the real ALU and
+   its actual rendered equation. Center the arrow on that same horizontal axis. */
+.workspace-layout > .alu-popup-portal .alu-equation::before {
+  top:50%!important;
+  transform:translateY(-50%)!important;
+}

@@ -1,0 +1,291 @@
+@import './vonbot-v014.css';
+@import './vonbot-v012.css';
+@import './vonbot-v013.css';
+@import './vonbot-v015.css';
+*{box-sizing:border-box}html,body,#root{margin:0;height:100%;min-height:100%;}body{background:#e8f4f9;color:#26384a}button,input,textarea{font:inherit}::selection{background:#bad8ff}
+.app-root{height:100dvh;min-height:630px;display:flex;flex-direction:column;overflow:hidden;background:#e8f4f9}
+.top-bar{background:linear-gradient(110deg,#1263ad,#287fc2)!important;flex:0 0 auto}.top-toolbar{min-height:55px!important;height:55px;display:flex;align-items:center;justify-content:space-between;padding-left:16px!important;padding-right:14px!important}.project-toolbar{height:48px;flex:0 0 48px;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:3px 15px}
+.workspace-layout{display:grid;grid-template-columns:minmax(350px,1.06fr) minmax(330px,.91fr) minmax(465px,1.35fr);gap:10px;padding:0 12px 11px;flex:1;min-height:0;max-width:2100px;width:100%;margin:0 auto;overflow:hidden;align-items:stretch}
+.editor-panel{display:flex;flex-direction:column;overflow:hidden;min-height:0;min-width:0;padding:11px!important}.editor-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-bottom:9px;min-height:43px;flex:0 0 auto}.editor-area{min-height:0;flex:1;border:1px solid #dce8f1;border-radius:10px;background:#fbfdff;overflow:hidden}.editor-controls{display:flex;flex-direction:column;gap:7px;flex:0 0 auto;padding-top:8px}.editor-controls .MuiButton-root{font-size:11.2px;min-height:34px}.execution-buttons{display:flex;gap:5px;align-items:center;min-width:0}.execution-buttons>.MuiButton-root:first-child{flex:0 0 auto}.execution-buttons>.MuiButton-root{white-space:nowrap;padding:4px 7px}.execution-buttons>.MuiButton-root .MuiButton-startIcon{margin-right:2px}.execution-buttons .MuiIconButton-root{padding:5px}.editor-settings .MuiOutlinedInput-root{height:36px}.editor-settings .MuiInputLabel-root{font-size:12px}.error-strip{max-height:75px;overflow:auto;margin-top:5px}
+.middle-panel{display:grid;grid-template-rows:minmax(200px,1.03fr) minmax(185px,.95fr) minmax(135px,.66fr);gap:10px;min-height:0;min-width:0;overflow:hidden}.computer-grid{display:contents}.flow-stage{min-height:0;flex:1;overflow:hidden;margin-top:2px}.flow-stage svg{display:block;height:100%;max-height:230px}.flow-running-path{animation:flow-dashes 1s linear infinite}@keyframes flow-dashes{to{stroke-dashoffset:-38}}
+.flow-node rect{fill:#253b57;stroke:#6e8cb0;stroke-width:1.7}.flow-node text{font-family:system-ui,sans-serif;text-anchor:middle;fill:#e8f7ff;font-weight:900;font-size:16px}.flow-node .flow-small{font-size:12px;fill:#bbd5ed}.flow-node .flow-value{font-size:16px;fill:#f5fffa;font-family:ui-monospace,monospace}.flow-node-on rect{fill:#315476;stroke:#fff;stroke-width:2.5}
+.cpu-card{overflow:hidden}.register-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:8px;flex:1;min-height:0}.register{background:#ffdfae;border-radius:9px;border:2px solid transparent;padding:7px 9px;position:relative;display:flex;flex-direction:column;justify-content:space-between;min-height:0}.register-active{border-color:#be6d12;background:#ffeecb}.register-value{font-family:ui-monospace,SFMono-Regular,monospace;font-weight:900!important;font-size:clamp(20px,2vw,27px)!important;text-align:right;background:white;border-radius:6px;padding:1px 7px;min-width:61px;align-self:end;font-variant-numeric:tabular-nums}.register-desc{color:#775329;font-size:10px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.io-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;min-height:0}.io-grid>.MuiCard-root{overflow:hidden}.console{height:100%;min-height:44px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#fff;border-radius:7px;padding:8px;color:#233144;font-size:14px;line-height:1.35}.console:empty:after{content:'Output appears here';color:#8b9bab;font-size:11px}
+.memory-panel{display:flex;flex-direction:column;min-height:0;overflow:hidden}.memory-inner{min-height:0;flex:1;display:flex;flex-direction:column;overflow:hidden}.memory-scroll{overflow:auto;min-width:0;min-height:0;flex:1;max-width:100%;display:flex;align-items:flex-start;justify-content:center}.memory-grid{display:grid;gap:3px;width:100%;max-width:100%;min-width:0;align-content:start}.memory-cell{width:100%;min-width:0;height:clamp(32px,calc((100dvh - 240px) / 11),61px);position:relative;border:2px solid transparent;border-radius:7px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:transform .13s,box-shadow .13s,border-color .13s}.memory-cell:hover{transform:translateY(-1px);box-shadow:0 3px 8px rgba(12,31,46,.16)}.memory-cell .addr{position:absolute;top:2px;left:4px;font-size:10px;opacity:.72;line-height:1.1}.memory-cell .val{font-weight:850;letter-spacing:.015em;font-variant-numeric:tabular-nums;font-size:clamp(11px,.94vw,16px);padding-top:9px}.memory-cell.code{background:#cbe1fb;color:#153f70}.memory-cell.data{background:#b5eab9;color:#1b5936}.memory-cell.empty{background:#344251;color:#eff4f8}.memory-cell.active{border-color:#ef9815;box-shadow:0 0 0 2px #ffd778;z-index:2}.memory-cell.target{border-color:#a24bf7;box-shadow:0 0 0 1px #8a42c8}.memory-cell.breakpoint::after{content:'';position:absolute;right:4px;top:4px;width:6px;height:6px;background:#e15759;border-radius:50%}.memory-grid .row-heading{align-self:center;text-align:center;color:#648095;font-size:10px;font-weight:700;min-width:0}
+.scroll-lite::-webkit-scrollbar,.console::-webkit-scrollbar{width:7px;height:7px}.scroll-lite::-webkit-scrollbar-thumb,.console::-webkit-scrollbar-thumb{background:#aebecb;border-radius:6px}
+.cm-editor{height:100%;font-size:13px;background:#fafcff!important}.cm-scroller{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace!important;line-height:1.65!important}.cm-gutters{background:#f2f6fa!important;color:#8c9eaf!important;border-right:1px solid #e3ebf1!important}.cm-focused{outline:none!important}.cm-activeLine{background:#eaf4ff!important}
+.blocks-layout{display:grid;grid-template-columns:92px minmax(112px,.83fr) minmax(150px,1.35fr);height:100%;min-height:0;overflow:hidden;background:#f4f7fa}.blocks-categories{display:flex;flex-direction:column;border-right:1px solid #dae2eb;background:#fff;min-height:0;overflow:auto}.blocks-categories button{border:0;background:transparent;text-align:left;padding:10px 5px 10px 8px;font-size:10.5px;font-weight:750;color:#44566a;display:flex;align-items:center;gap:5px;cursor:pointer}.blocks-categories button:hover,.blocks-categories .category-active{background:#eaf2fc;color:#183e6e}.category-dot{height:9px;width:9px;background:var(--category-color);border-radius:3px;flex-shrink:0}.blocks-flyout{padding:9px 7px;overflow:auto;min-width:0;background:#e8edf5;border-right:1px solid #cfd9e5}.toolbox-block{display:flex;align-items:center;flex-wrap:wrap;gap:4px;color:white;text-align:left;background:var(--block-color);border:0;border-radius:7px;padding:9px 7px;margin:6px 0;width:100%;min-width:0;cursor:grab;font-size:10px;font-weight:750;position:relative;box-shadow:0 2px 0 rgba(0,0,0,.2)}.toolbox-block:before,.block-piece:before{content:'';position:absolute;top:-3px;left:19px;width:22px;height:6px;border-radius:4px 4px 0 0;background:var(--block-color)}.toolbox-block:hover{filter:brightness(1.12)}.toolbox-op{background:#ffffff30;padding:1px 3px;border-radius:3px;font-family:ui-monospace,monospace}.fake-slot{background:white;border-radius:3px;padding:2px 4px;color:#24344c;font-family:ui-monospace,monospace}.blocks-workspace{padding:9px 7px;overflow:auto;min-width:0;background-color:#f9fbff;background-image:radial-gradient(#d3ddeb 1px,transparent 1px);background-size:16px 16px}.workspace-heading{display:flex;gap:5px;align-items:center;margin-bottom:10px}.workspace-heading>.MuiTypography-root:last-child{margin-left:auto}.workspace-placeholder{border:2px dashed #b9c8d8;padding:14px 10px;border-radius:9px;color:#617890;text-align:center;font-size:11px}.block-stack-row{margin:5px 0;position:relative;min-width:0}.block-stack-row.drag-source{opacity:.45}.block-stack-row.drop-target{border-top:4px solid #0b88d2}.block-piece{background:var(--block-color);color:#fff;position:relative;border-radius:8px;padding:7px 5px 7px 3px;box-shadow:0 2px 0 rgba(0,0,0,.18);display:flex;flex-wrap:wrap;align-items:center;gap:4px;min-width:0;font-weight:700;font-size:11px;cursor:grab}.piece-grip{opacity:.85;flex-shrink:0}.block-piece input,.block-piece select{min-width:0;height:25px;border:0;border-radius:5px;background:#fff;color:#15324d;font-weight:800;font-size:11px}.piece-label{width:52px;padding:2px 4px}.piece-op{width:56px;padding:2px}.piece-word{font-size:10.5px}.piece-operand{width:48px;padding:2px 4px}.block-actions{display:flex;justify-content:flex-end}.block-actions .MuiIconButton-root{padding:3px}.block-comment{display:flex;align-items:center;margin:5px 0}.block-comment input{min-width:0;width:100%;border:1px dashed #cbd7e2;color:#3a8260;background:#fff;border-radius:6px;padding:5px 6px;font-size:11px}.workspace-add{display:inline-flex;align-items:center;gap:3px;color:#1665b4;border:1px solid #bdd4ef;background:white;border-radius:7px;margin:8px 4px 2px 0;padding:5px 6px;font-size:10px;cursor:pointer}
+@media(max-width:1320px){.workspace-layout{grid-template-columns:minmax(310px,1fr) minmax(290px,.93fr) minmax(400px,1.29fr);gap:7px;padding:0 7px 7px}.editor-panel{padding:8px!important}.execution-buttons .MuiButton-root{font-size:10px}.blocks-layout{grid-template-columns:79px minmax(98px,.86fr) minmax(129px,1.2fr)}.memory-cell .val{font-size:12px}}
+@media(max-width:1090px){.app-root{height:auto;min-height:100dvh;overflow:visible}.workspace-layout{grid-template-columns:minmax(0,1fr) minmax(0,1fr);overflow:visible;flex:0 0 auto}.editor-panel{min-height:650px}.editor-area{min-height:400px}.middle-panel{min-height:650px}.memory-panel{grid-column:1/-1;min-height:460px}.memory-cell{height:48px}.memory-grid{max-width:950px}}
+@media(max-width:690px){.workspace-layout{display:flex;flex-direction:column}.editor-panel{width:100%;height:650px}.middle-panel{width:100%;min-height:670px}.memory-panel{width:100%}.project-toolbar{height:auto;min-height:45px;flex-wrap:wrap}.top-toolbar{height:auto;min-height:58px!important}.execution-buttons{flex-wrap:wrap}.blocks-layout{grid-template-columns:80px 112px minmax(0,1fr)}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important}svg animateMotion{display:none}}
+
+/* v0.3 — full width micro:bit-inspired block workspace overlay, without changing the RAM panel */
+.workspace-layout{position:relative}
+.workspace-layout>.editor-panel{grid-column:1;grid-row:1}
+.workspace-layout>.middle-panel{grid-column:2;grid-row:1}
+.workspace-layout>.memory-panel{grid-column:3;grid-row:1}
+.blocks-overlay{grid-column:1/3;grid-row:1;position:relative;z-index:30;min-width:0;min-height:0;height:100%;display:flex;flex-direction:column;overflow:hidden;background:#fff;border:2px solid #a9bfd5;border-radius:13px;box-shadow:6px 5px 28px #132d4c25}
+.blocks-topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#f7fbff;border-bottom:1px solid #dce8f1;padding:9px 12px;flex:0 0 auto;min-height:52px}
+.blocks-title{display:flex;align-items:center;gap:8px;min-width:0}.blocks-title svg{color:#156bc0}.blocks-title strong{font-size:15px;white-space:nowrap}.blocks-title span{font-size:11px;color:#526d83;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.blocks-overlay>.blocks-layout{flex:1;height:auto;grid-template-columns:145px 215px minmax(225px,1fr);min-height:0}
+.blocks-categories button{font-size:12px;padding:12px 10px;gap:10px}
+.category-dot{width:11px;height:11px;border-radius:3px}
+.blocks-flyout{padding:16px 13px}
+.toolbox-block{min-height:42px;padding:10px 14px;margin:13px 0;gap:9px;font-size:14px;border-radius:8px;box-shadow:0 3px 0 #0002;max-width:195px}
+.toolbox-op{font-size:14px;background:transparent;font-weight:900;letter-spacing:.03em}
+.fake-slot{font-size:13px;padding:3px 10px}
+.blocks-workspace{padding:18px 16px;background-size:20px 20px}
+.workspace-heading{margin-bottom:19px}.workspace-placeholder{font-size:13px;padding:35px 18px}
+.block-stack-row{position:relative;margin:4px 0 4px 4px;display:flex;align-items:center;gap:8px;width:max-content;max-width:100%}
+.block-piece{padding:9px 14px 9px 7px;min-width:160px;min-height:44px;gap:12px;border-radius:7px;color:white;font-size:14px;box-shadow:0 3px 0 #0003;display:flex;flex-wrap:nowrap}
+.block-piece .piece-grip{cursor:grab;opacity:.85}.piece-command{letter-spacing:.025em;font-weight:900}
+.block-piece input.piece-operand{height:29px;min-width:70px;width:104px;font-size:13px;font-family:ui-monospace,monospace;padding:4px 7px}
+.block-delete{opacity:0;background:#fce9e9!important;transition:opacity .15s}.block-stack-row:hover .block-delete,.block-delete:focus-visible{opacity:1}
+.block-comment{margin:7px 0;max-width:390px}.block-comment input{font-size:12px;padding:8px}.workspace-add{font-size:12px;padding:6px 10px}
+.block-bottom-drop{margin:15px 0 3px;max-width:350px;border:2px dashed #afc7da;padding:14px;border-radius:8px;font-size:12px;font-weight:700;color:#628099;text-align:center}
+.block-stack-row.executing-block .block-piece{outline:3px solid #ffe37d;outline-offset:2px}
+.block-stack-row.input-block-pulse .block-piece{animation:input-block-pulse 1.1s ease-in-out infinite}
+@keyframes input-block-pulse{0%,100%{box-shadow:0 0 0 3px #d1a9ff,0 0 0 7px #ddc4ff55}50%{box-shadow:0 0 0 5px #8e40ff,0 0 24px 10px #bb5aff9d}}
+.block-mode-message{padding:20px;font-size:13px;color:#566e84}
+
+/* Expanded register labels and high-priority accumulator */
+.accumulator-register{flex:1.12;min-height:0;display:grid;grid-template-columns:1fr auto;grid-template-rows:1fr auto;align-items:center;gap:0 15px;padding:9px 14px;border:2px solid #d88b2f;border-radius:10px;background:#ffdb9d;margin-bottom:7px}
+.accumulator-register>span{font-weight:900;font-size:clamp(13px,1.12vw,18px);color:#773700}
+.accumulator-register>strong{grid-column:2;grid-row:1/3;background:white;padding:3px 12px;border-radius:8px;font-family:ui-monospace,monospace;color:#692c09;font-size:clamp(25px,2.4vw,42px);font-variant-numeric:tabular-nums}
+.accumulator-register>small{font-size:10px;color:#86531e}
+.register-grid{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:minmax(0,1fr);gap:6px;flex:.95}
+.register{padding:7px 6px;align-items:center;gap:4px;text-align:center}.register .MuiTypography-root:first-child{font-size:clamp(9px,.85vw,12px);line-height:1.2}
+.register-value{font-size:clamp(17px,1.7vw,28px)!important;min-width:0;align-self:center;padding:1px 8px}
+
+/* Dataflow is deliberately diagrammatic: bright lines for the last actual CPU micro-operation. */
+.flow-card{border:1px solid #537395!important}
+.flow-phase-chip{border:1px solid #567;flex:1;text-align:center;border-radius:5px;padding:3px;color:#bcd5ec;font-size:10px;font-weight:900;letter-spacing:.04em}
+.flow-phase-chip.phase-current{background:#1c496c;color:#fff;box-shadow:inset 0 0 0 1px #fff8}
+.flow-stage{margin:0;flex:1;min-height:0;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.flow-stage svg{max-height:100%;width:100%;height:100%;overflow:visible}
+.flow-idle-line{fill:none;stroke:#496079;stroke-width:2.2;opacity:.45}
+.flow-lit-line{fill:none;stroke-width:5;stroke-linecap:round;stroke-dasharray:12 8;animation:flow-dashes 1.2s linear infinite;opacity:1}
+.diagram-node rect{fill:#20364e;stroke:#7596bc;stroke-width:2}
+.diagram-node .diagram-label{font-size:14px;font-family:system-ui,sans-serif;text-anchor:middle;fill:#f2f9ff;font-weight:800}
+.diagram-node .diagram-value{font-size:16px;font-family:ui-monospace,monospace;text-anchor:middle;fill:#c7edff;font-weight:800}
+.diagram-node-active rect{fill:#2b5075;stroke:#fff;stroke-width:3}
+.diagram-alu rect{fill:#56361e;stroke:#ffbd62}
+.diagram-alu .diagram-label{font-size:13px;fill:#ffce88}
+.diagram-alu .diagram-value{font-size:19px;fill:#fff}
+.diagram-accumulator rect{fill:#284d31;stroke:#81f7a0;stroke-width:3}
+.diagram-accumulator .diagram-label{font-size:16px;fill:#c9ffd6}
+.diagram-accumulator .diagram-acc-value{font-size:26px;font-family:ui-monospace,monospace;text-anchor:middle;fill:#fff;font-weight:900}
+.flow-plus-one{fill:#fde597;text-anchor:middle;font-size:13px;font-weight:900}
+.flow-explanation{background:#1d344f;border:1px solid #617e9c;padding:7px 8px;border-radius:8px;flex-shrink:0;min-height:46px}
+
+/* Show the Input card FIRST; make input requests unmistakable. */
+.input-card.input-needs-value{animation:input-card-pulse 1.12s ease-in-out infinite;border:3px solid #893be2!important;background:#f3e3ff!important;z-index:3}
+@keyframes input-card-pulse{0%,100%{box-shadow:0 0 0 0 #8d37e66b}50%{box-shadow:0 0 0 8px #a64eff66,0 0 20px #9137cc44}}
+
+@media(max-width:1320px){.blocks-overlay>.blocks-layout{grid-template-columns:108px 155px minmax(180px,1fr)}.blocks-categories button{font-size:11px;padding:11px 5px}.toolbox-block{font-size:12px;padding:9px}.block-piece{min-width:135px}}
+@media(max-width:1090px){.blocks-overlay{grid-column:1/3;grid-row:1}.workspace-layout>.memory-panel{grid-column:1/-1;grid-row:2}}
+@media(max-width:690px){.blocks-overlay{grid-column:auto;grid-row:auto;position:fixed;inset:60px 5px 6px;z-index:55}.blocks-overlay>.blocks-layout{grid-template-columns:95px 120px minmax(140px,1fr)}.blocks-title span{display:none}.blocks-title strong{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.input-card.input-needs-value,.block-stack-row.input-block-pulse .block-piece{animation:none!important;outline:3px solid #8e40ff}}
+.blocks-io-dock{display:flex;min-height:60px;max-height:90px;flex:0 0 auto;gap:15px;padding:8px 12px;border-top:1px solid #c9d8e7;background:#eef5fb;align-items:stretch}
+.blocks-dock-input{display:flex;align-items:center;gap:8px;min-width:0;flex:0 0 auto}
+.blocks-dock-input strong,.blocks-dock-output strong{font-size:11px;white-space:nowrap;color:#5b2c8e}
+.blocks-dock-input input{width:100px;height:35px;border:1px solid #9fadd3;border-radius:6px;padding:5px;font-size:14px}
+.blocks-dock-input button{background:#7137b6;border:0;border-radius:6px;color:#fff;padding:8px 12px;font-weight:800;cursor:pointer}
+.blocks-dock-input button:disabled{background:#9eaaba;cursor:default}
+.blocks-dock-output{display:flex;align-items:center;gap:9px;min-width:0;flex:1;border-left:1px solid #ccd9e8;padding-left:12px}
+.blocks-dock-output code{display:block;background:#fff;color:#27364a;min-width:0;flex:1;max-height:55px;overflow:auto;padding:7px;border-radius:6px;white-space:pre-wrap;font-size:13px}
+.blocks-input-active{animation:input-card-pulse 1.12s ease-in-out infinite;background:#f3ddff;border:2px solid #873ad7}
+@media(max-width:1320px){.blocks-io-dock{gap:8px;padding:6px}.blocks-dock-input{gap:4px}.blocks-dock-input input{width:70px}.blocks-dock-output{gap:5px}}
+.flow-focused{position:fixed!important;inset:4vh 5vw!important;width:90vw!important;height:92vh!important;z-index:1000;box-shadow:0 8px 0 100vmax #071627aa,0 30px 65px #000a!important;padding:17px!important}
+.flow-focused .flow-stage svg{max-height:none}
+.flow-focused .flow-explanation{min-height:75px;padding:15px}
+.flow-focused .flow-explanation .MuiTypography-root{font-size:17px}
+.flow-focused .flow-phase-chip{font-size:15px;padding:8px}
+/* Reserve enough space for Input on laptop displays and give the data flow the most vertical room. */
+.middle-panel{grid-template-rows:minmax(188px,1.45fr) minmax(170px,.96fr) minmax(112px,.63fr)}
+
+/* v0.4 — prominent teaching registers: instruction and address registers are internal-only. */
+.program-counter-register{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#ffe5bd;border:2px solid #e4a14a;border-radius:10px;padding:6px 12px;min-height:54px;margin-bottom:5px}
+.program-counter-register>span{font-weight:900;color:#833a11;font-size:clamp(12px,1.03vw,16px)}
+.program-counter-register>strong{background:white;color:#632705;border-radius:8px;font:900 clamp(22px,2vw,33px)/1.3 ui-monospace,monospace;min-width:62px;padding:0 10px;text-align:center;font-variant-numeric:tabular-nums}
+.accumulator-register{flex:1.5;margin-bottom:6px}
+
+/* Physical data pipes remain visible. Saturated dots travel along true SVG paths. */
+.flow-stage svg{overflow:visible}
+.flow-pipe{fill:none;stroke:#6686aa;stroke-width:7;stroke-linecap:round;stroke-linejoin:round;opacity:.72}
+.flow-active-pipe{fill:none;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 6px currentColor);opacity:1}
+.pipe-node rect{fill:#172f46;stroke:#8ca9c8;stroke-width:2.5}
+.pipe-node-active rect{stroke:#fff;stroke-width:4;filter:drop-shadow(0 0 8px #62dcff88)}
+.pipe-node .pipe-node-label{fill:#e3f3ff;font-family:system-ui,sans-serif;font-size:17px;font-weight:900;text-anchor:middle;letter-spacing:.04em}
+.pipe-node .pipe-node-value{fill:#fff;font-family:ui-monospace,monospace;font-size:21px;font-weight:900;text-anchor:middle}
+.pipe-node .pipe-node-sub{fill:#d5e5f8;font-size:12px;font-weight:750;text-anchor:middle}
+.pipe-pc rect{fill:#213e5b;stroke:#5ad4ff;stroke-width:3.5}
+.pipe-acc rect{fill:#17402b;stroke:#80ffa3;stroke-width:4.5}
+.pipe-alu rect{fill:#633510;stroke:#ffbe60;stroke-width:3.5}
+.pipe-in rect,.pipe-out rect{fill:#342448;stroke:#d2aeff}
+.pipe-pc-value{fill:#fff;font:900 43px/1 ui-monospace,monospace;text-anchor:middle}
+.pipe-acc-value{fill:#fff;font:900 60px/1 ui-monospace,monospace;text-anchor:middle}
+.pipe-alu-value{fill:#fff1b4;font:900 40px/1 ui-monospace,monospace;text-anchor:middle}
+.pipe-pc-increment{fill:#ffe877;font-family:system-ui,sans-serif;font-size:13px;font-weight:900;text-anchor:middle}
+
+/* Micro:bit-style interlocking puzzle blocks. Tabs physically descend into the next top socket. */
+.block-stack-row{margin:0 0 0 4px;padding-top:0;padding-bottom:4px;isolation:auto}
+.block-piece{position:relative;margin:0;border-radius:7px 7px 5px 5px;overflow:visible;box-shadow:0 3px 0 #0002}
+.block-piece::before{content:"";position:absolute;top:-1px;left:38px;width:30px;height:8px;background:#f4f7fa;border-radius:0 0 5px 5px;z-index:2;pointer-events:none}
+.block-piece::after{content:"";position:absolute;left:38px;bottom:-12px;width:30px;height:13px;background:var(--block-color);border-radius:0 0 6px 6px;box-shadow:0 2px 0 #0002;z-index:3;pointer-events:none}
+.block-stack-row:has(+ .block-stack-row)>.block-piece::after{display:block}
+.block-stack-row:last-of-type>.block-piece::after{display:block}
+.block-stack-row.drag-source .block-piece{opacity:.55}
+.block-piece input.address-socket{outline:2px solid #ffffffaa;outline-offset:1px;border:2px dashed #2b5078;cursor:copy;transition:box-shadow .14s,background .14s}
+.block-piece input.address-socket:hover,.block-piece input.address-socket:focus{background:#effaff;box-shadow:0 0 0 3px #2af1ffaa}
+.memory-cell[draggable="true"]{cursor:grab}
+.memory-cell[draggable="true"]:active{cursor:grabbing}
+@media (prefers-reduced-motion:reduce){.flow-active-pipe{filter:none}}
+
+@media (prefers-reduced-motion:reduce){.flow-token{display:none}}
+
+/* v0.5: Material-style, phase-driven Fetch / Decode / Execute teaching console. */
+.workspace-layout{position:relative;isolation:isolate}
+.middle-panel{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+.teaching-flow{display:flex;flex-direction:column;gap:8px;height:100%;min-height:0;overflow:hidden}
+.stage-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;flex-shrink:0;min-height:57px}
+.stage-tab{position:relative;display:flex;align-items:center;gap:8px;padding:7px 9px;border-radius:12px;box-shadow:0 2px 5px #162e4b14;transition:opacity .22s,filter .22s,background .22s}
+.stage-tab.is-muted{background:#c8d0dd;color:#314155;opacity:.53;filter:grayscale(1)}
+.stage-tab.stage-fetch.is-active{background:#087bf6;color:#fff;box-shadow:0 1px 10px #087bf677}
+.stage-tab.stage-decode.is-active{background:#10a768;color:#fff;box-shadow:0 1px 10px #10a76866}
+.stage-tab.stage-execute.is-active{background:#ffca39;color:#312608;box-shadow:0 1px 10px #f6be3480}
+.stage-step{border-radius:50%;height:27px;min-width:27px;display:flex;align-items:center;justify-content:center;background:#ffffffd9;color:#1b4a7e;font-weight:900;font-size:14px}
+.stage-name{font-size:clamp(11px,1vw,14px)!important;font-weight:900!important;line-height:1.13!important;letter-spacing:.025em}
+.stage-desc{font-size:9px!important;line-height:1.2!important;opacity:.91}
+.stage-arrow{position:absolute;right:-8px;z-index:1;top:calc(50% - 10px);color:#344e75}
+.teaching-card{flex:0 0 auto;padding:10px!important;min-width:0;position:relative;overflow:visible!important;border:1px solid #dbe5eb!important;box-shadow:0 2px 8px #1b2d4b0b!important;transition:opacity .2s,filter .2s,border .2s}
+.teaching-card.phase-dimmed{opacity:.48;filter:grayscale(.67)}
+.teaching-card.phase-emphasis{opacity:1;filter:none}
+.fetch-card{background:#eef6ff!important;min-height:88px;border-left:4px solid #087bf6!important}
+.decode-card{background:#e7f8ed!important;border-left:4px solid #10a768!important;min-height:133px}
+.execute-card{background:#fff8e6!important;border-left:4px solid #efbd25!important;min-height:190px;flex:1;display:flex;flex-direction:column}
+.register-display{display:flex;align-items:center;gap:6px;padding:8px;background:#fff;border:1px solid #b5d6ff;border-radius:10px;min-width:0;max-width:51%}
+.register-display svg{color:#126ec3}
+.register-label{font-size:11.6px!important;line-height:1.2!important;font-weight:900!important;white-space:nowrap}
+.register-hint{font-size:9px!important;color:#64798b;white-space:nowrap}
+.register-display strong{font:900 27px ui-monospace,monospace;background:#e6f2ff;color:#104c86;padding:4px 8px;border-radius:7px;min-width:46px;text-align:center;margin-left:auto}
+.fetch-message{flex:1;min-width:0;padding:4px 3px 4px 8px;color:#174778}
+.decode-registers{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.decode-register{display:flex;align-items:center;gap:5px;min-width:0;background:#fff;padding:6px;border:1px solid #d1e7d9;border-radius:9px;color:#18613c}
+.decode-register span{font-size:10.5px;font-weight:800;line-height:1.1;flex:1}
+.decode-register strong{font:900 19px ui-monospace,monospace;background:#e6f3eb;border-radius:6px;min-width:36px;text-align:center;padding:4px;color:#1b543e}
+.stage-explanation{font-size:10.7px!important;line-height:1.35!important;margin:7px 0 0!important;background:#c7edda;padding:6px 9px;border-radius:8px;color:#19553d}
+.execute-main{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1fr);gap:7px;flex:1;min-height:85px}
+.accumulator-box{background:#fff;border:1px solid #edcf84;border-radius:10px;padding:7px 10px;display:flex;flex-direction:column;align-items:center;justify-content:space-around;color:#704b08}
+.accumulator-box strong{font:900 clamp(26px,2.45vw,43px)/1.1 ui-monospace,monospace;color:#4b3104;letter-spacing:.045em}
+.execution-detail{background:#fff1c6;border-radius:9px;padding:8px;line-height:1.32;display:flex;flex-direction:column;justify-content:center}
+.alu-box{display:flex;align-items:center;gap:7px;min-width:0;background:#f2ebff;border:1px solid #e1d5fa;border-radius:9px;padding:6px 9px;margin-top:7px;color:#58368d}
+.alu-box .MuiChip-root{flex:0 0 auto}
+.teaching-io{flex:0 0 117px;min-height:0;gap:8px}
+.teaching-io>.MuiCard-root{border:1px solid #ddd3f5}
+.teaching-io .MuiTextField-root .MuiInputBase-root{height:34px}
+.teaching-io .MuiButton-root{font-size:11px;padding:4px 8px}
+.teaching-io .console{flex:1;min-height:0;font-size:12px}
+/* Persistent rails are behind the bright animated paths. Tokens are real SVG animateMotion elements. */
+.lmc-rail-overlay{position:absolute;inset:0;pointer-events:none;z-index:9;overflow:visible;max-width:100%;max-height:100%;}
+.rail-base{fill:none;stroke:#6f859c;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;opacity:.42}
+.rail-lit{fill:none;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 4px currentColor);opacity:.98}
+@media(max-height:760px) and (min-width:1091px){.stage-tabs{min-height:48px}.stage-tab{padding:5px}.teaching-flow{gap:5px}.teaching-card{padding:7px!important}.fetch-card{min-height:72px}.decode-card{min-height:114px}.execute-card{min-height:162px}.teaching-io{flex-basis:103px}.stage-explanation{padding:4px 6px}}
+@media(max-width:1330px){.register-display strong{font-size:22px}.stage-desc{display:none}.decode-register span{font-size:9.5px}.alu-box .MuiChip-root{display:none}.teaching-flow{gap:5px}}
+@media(max-width:1090px){.lmc-rail-overlay{display:none}.middle-panel{min-height:660px}}
+@media(prefers-reduced-motion:reduce){.traveling-orb{display:none}.rail-lit{stroke-width:5;stroke-dasharray:8 9}}
+
+/* v0.6: continuous cross-panel physical data bus (CPU ↔ full RAM grid).
+   Tracks occupy panel gutters and connect real cards/cells, not a miniature diagram. */
+@media(min-width:1091px){
+ .workspace-layout{column-gap:19px;grid-template-columns:minmax(325px,1.04fr) minmax(345px,.99fr) minmax(445px,1.38fr)}
+ .memory-panel{position:relative}
+}
+.lmc-rail-overlay{z-index:12;overflow:visible;filter:none}
+.rail-base{stroke:#7898b5;stroke-width:5;opacity:.62;stroke-linejoin:round;stroke-linecap:round}
+.rail-lit{stroke-width:7;opacity:1;filter:drop-shadow(0 0 6px #00c9ff)}
+/* Preserve readable labels while the rails pass between the modules. */
+.teaching-card,.memory-inner{position:relative}
+.teaching-card .stage-explanation,.teaching-card .execution-detail{position:relative;z-index:1}
+@media(max-width:1090px){.lmc-rail-overlay{display:block}}
+
+/* Fetch rail occupies the clear horizontal track above its explanation. */
+.fetch-card{min-height:100px;display:flex;flex-direction:column;gap:5px}
+.fetch-upper{display:flex;align-items:center;min-height:50px}
+.fetch-card .register-display{max-width:76%;min-width:190px;position:relative}
+.fetch-rail-space{flex:1;min-height:40px}
+.fetch-card .fetch-message{padding:4px 7px 4px 8px;margin-top:auto;flex:0 0 auto;background:#e1efff;border-radius:8px}
+.fetch-card .fetch-message .MuiTypography-root{line-height:1.18}
+@media(max-height:760px) and (min-width:1091px){.fetch-card{min-height:88px;gap:2px}.fetch-upper{min-height:38px}.fetch-rail-space{min-height:30px}}
+
+/* v0.7: persistent rails in the unobstructed card gutters; tokens float over them. */
+.lmc-rails-back,.lmc-orb-front{position:absolute;inset:0;pointer-events:none;overflow:visible;width:100%;height:100%}
+.lmc-rails-back{z-index:1}.lmc-orb-front{z-index:15}
+.lmc-rails-back .rail-base{stroke:#6489a6;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;opacity:.64}
+.lmc-rails-back .rail-lit{stroke-width:7;stroke-linecap:round;stroke-linejoin:round;fill:none;filter:drop-shadow(0 0 6px #06b9ff)}
+.middle-panel{position:relative;z-index:2}
+.editor-panel,.memory-panel{position:relative;z-index:2}
+.teaching-card,.teaching-io{position:relative;z-index:3}
+.lmc-travel-token text{paint-order:stroke;stroke:#145486;stroke-width:1px}
+/* Neon outline glides to the executing source line; unlike selecting an editor line,
+   it does not steal keyboard focus or move the caret. */
+.lmc-current-instruction{position:absolute;inset:0 2px auto 42px;width:calc(100% - 46px);z-index:6;pointer-events:none;border:2px solid #00baff;border-radius:5px;background:#10cfff12;box-shadow:0 0 6px 2px #24c7ffb5,inset 0 0 7px #24c7ff77;transition:transform 320ms cubic-bezier(.22,.75,.3,1),height 220ms ease;animation:code-focus-glow 1.6s ease-in-out infinite}
+@keyframes code-focus-glow{50%{box-shadow:0 0 13px 5px #01a9ffd9,inset 0 0 9px #19c9ff9c}}
+@media(prefers-reduced-motion:reduce){.lmc-current-instruction{transition:none;animation:none}}
+/* Preserve compact desktop controls after adding a reversible Step. */
+.execution-buttons{flex-wrap:wrap}
+.execution-buttons .MuiButton-root{flex:0 0 auto}
+
+/* v0.8: active instruction overlay uses the actual CodeMirror line bounds.
+   Top/left are measured from the rendered row, so the glow never bisects text. */
+.lmc-current-instruction{
+  inset:0 auto auto 0;
+  box-sizing:border-box;
+  border:2px solid #00baff;
+  border-radius:5px;
+  background:rgba(0,186,255,.07);
+  box-shadow:0 0 6px 2px #24c7ffb5,inset 0 0 4px #24c7ff77;
+  transition:transform 320ms cubic-bezier(.22,.75,.3,1),height 220ms ease,left 220ms ease,width 220ms ease;
+}
+
+/* v0.8 directional arrows on the illuminated data routes; hidden when idle. */
+.lmc-route-arrow{fill:none;stroke-width:2.4;opacity:.9;stroke-dasharray:9 13;stroke-linecap:round;pointer-events:none}
+
+/* v0.9 — rails are clean pipes, with the moving data token showing direction. */
+.lmc-route-arrow,.lmc-rail-arrow,.lmc-rails-back marker,.lmc-orb-front marker{display:none!important}
+.alu-box{width:max-content;max-width:100%;min-width:182px;flex:0 0 auto;padding:6px 11px;margin-top:6px}
+.alu-box .MuiTypography-root{line-height:1.24}
+/* A subdued idle card makes each current CPU phase prominent. */
+
+/* v1.0: DAT declarations remain mint; runtime-created values are amber. */
+.memory-cell.dat{background:#91e2bd;color:#124f38}
+.memory-cell.data{background:#ffdfa3;color:#693f04}
+
+/* v1.0: an attached label socket at each instruction's LEFT edge. */
+.blocks-workspace .block-stack-row{display:flex;align-items:center;gap:4px;min-width:0;flex-wrap:wrap;padding:4px 0 7px 0}
+.block-label-socket{display:flex;align-items:center;gap:1px;flex:0 0 76px;border-radius:7px;background:#f0e9ff;border:1px solid #ae92e0;padding:2px 3px;color:#6235a1;font-weight:900;height:31px}
+.block-label-socket input{width:calc(100% - 8px);min-width:0;border:0;outline:0;background:transparent;color:#4c2084;font:800 10px ui-monospace,monospace;text-transform:uppercase;padding:0 2px}
+.block-label-socket input::placeholder{color:#957caf;font-size:9px}
+.blocks-workspace .block-piece{flex:1;min-width:100px}
+.blocks-workspace .inline-block-comment{flex:0 1 86px;width:86px;min-width:40px;background:#f4fff7;border:1px dashed #a4cdb5;border-radius:5px;font-size:10px;color:#386746;padding:5px}
+.blocks-workspace .block-delete{margin-left:auto;flex:0 0 auto}
+.blocks-workspace .block-comment{display:flex;gap:4px;min-width:0;padding:4px 2px}
+.blocks-workspace .block-comment.drag-source{opacity:.4}
+.blocks-workspace .block-comment.drop-target{border-top:4px solid #0b88d2}
+.comment-grip{display:inline-flex;align-items:center;justify-content:center;cursor:grab;color:#607488;touch-action:none;min-width:19px;user-select:none}
+.comment-grip:active{cursor:grabbing}
+@media(max-width:1300px){.block-label-socket{flex-basis:64px}.blocks-workspace .inline-block-comment{flex-basis:65px}}
+
+/* v1.0: two-digit operation stands apart from the plain-English Decode explanation. */
+.decode-explanation{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.decode-opcode-chip{background:#0d965d!important;color:#fff!important;border-radius:7px!important;font-weight:900!important;font-family:ui-monospace,monospace!important}
+.decode-explanation .MuiTypography-root{flex:1;min-width:140px}
+
+/* v0.11 VonBot identity and compact live RAM occupancy meter. */
+.vonbot-logo-frame{width:39px;height:39px;display:grid;place-items:center;border-radius:10px;background:#ffffff20;flex:0 0 auto}
+.vonbot-subtitle{font-size:10.8px!important;line-height:1.25!important;font-weight:500!important;opacity:.93;letter-spacing:.005em}
+.ram-usage-meter{width:144px;min-width:120px;flex-shrink:0;border-radius:8px;padding:5px 8px;background:#fff;border:1px solid #d6e3ec;cursor:help}
+.ram-usage-caption{font-size:9.6px!important;font-weight:850!important;letter-spacing:.045em;color:#526f7f}
+.ram-usage-percent{font-size:11.5px!important;font-weight:900!important;font-variant-numeric:tabular-nums}
+@media(max-width:690px){.ram-usage-meter{width:125px}.vonbot-subtitle{font-size:10px!important}}

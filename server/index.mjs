@@ -1,0 +1,11 @@
+import express from 'express';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const app = express();
+app.disable('x-powered-by');
+const port = Number(process.env.PORT || 3000);
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../dist');
+app.get('/api/health', (_req, res) => res.json({ ok: true, name: 'vonbot', version: '1.0.0' }));
+app.use(express.static(root, { immutable: false, maxAge: '1h', index: false }));
+app.get('/{*path}', (_req, res) => res.sendFile(path.join(root, 'index.html')));
+app.listen(port, '0.0.0.0', () => console.log(`VonBot running on http://0.0.0.0:${port}`));

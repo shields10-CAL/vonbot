@@ -1,0 +1,76 @@
+/* VonBot v0.15 — compact phase geometry, clear routes, responsive height. */
+/* Place rails above the Fetch cards without wasting vertical space. */
+.fetch-card{min-height:118px!important;gap:3px!important}
+.fetch-rail-space{min-height:11px!important;flex:0 0 11px!important}
+.fetch-upper{min-height:46px!important}
+.fetch-message{padding:6px 9px!important}
+/* The Decode fork has an uninterrupted physical T and longer vertical arms. */
+.decode-card{min-height:141px!important}
+.decode-rail-junction{height:26px!important;width:10px!important;margin:4px auto 5px!important}
+.decode-rail-junction::after{display:none!important}
+.decode-registers{gap:9px}
+/* Reserve a dedicated gutter BETWEEN Decode and Execute for the command rail. */
+.execute-card{margin-top:5px!important;min-height:149px!important}
+.execute-body{min-height:0}
+.execute-main{min-height:0;flex:1}
+.alu-box{min-height:33px;max-height:none;flex-shrink:0}
+/* Status replaces the three-step ribbon rather than appearing above it. */
+.cycle-status-banner{width:100%;min-height:52px;flex:0 0 52px;display:flex;align-items:center;justify-content:center;gap:9px;padding:9px 14px;text-align:center;border-radius:12px;font-size:13px;font-weight:900;letter-spacing:.012em}
+.cycle-status-banner.completed{background:#d8dee6;border:1px solid #acb8c6;color:#43515f}
+.cycle-status-banner.completed::before{content:'✓';display:grid;place-items:center;border-radius:50%;background:#eef2f5;color:#475869;width:26px;height:26px}
+.cycle-status-banner.halted{background:#b71932;color:white;border:2px solid #f26f7e;box-shadow:0 0 0 3px #ffbac153}
+.cycle-status-banner.halted::before{content:'■';font-size:14px}
+.teaching-flow:has(.cycle-status-banner) .teaching-card{opacity:.46;filter:grayscale(.65)}
+.teaching-flow:has(.cycle-status-banner.halted) .execute-card{opacity:1!important;filter:none!important;background:#ffe4e4!important;border-left-color:#c21c38!important;border-color:#dc425c!important}
+.teaching-flow:has(.cycle-status-banner.halted) .execute-card .execution-detail{background:#ffd1d5!important;color:#6e1320!important}
+.teaching-flow:has(.cycle-status-banner.halted) .execute-inbox{background:#d0253b!important;color:#fff!important;border-color:#ff8d9d!important;box-shadow:0 0 12px #df14278f!important}
+.teaching-flow:has(.cycle-status-banner.halted) .teaching-io .MuiCard-root{opacity:1;filter:none;background:#ffe2e7!important;border-color:#d64559!important}
+.teaching-flow:has(.cycle-status-banner.halted) .teaching-io .MuiTypography-root{color:#90172b!important}
+.teaching-flow:has(.cycle-status-banner.halted) .teaching-io .console{background:#fff5f6}
+/* Keep I/O accessible on 13-inch laptop viewport heights, not clipped below the panel. */
+.middle-panel,.teaching-flow{min-height:0!important}
+.teaching-flow{gap:6px!important;overflow:visible}
+.teaching-io{flex:0 0 112px!important;min-height:100px!important;position:relative}
+.teaching-io .MuiCard-root{overflow:hidden}
+.teaching-io .MuiTextField-root .MuiInputBase-root{height:31px}
+.teaching-io .MuiButton-root{min-width:48px;padding:3px 6px}
+.teaching-io .console{min-height:32px}
+.blocks-workspace .block-line-number{width:29px;flex:0 0 29px;align-self:center;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1;color:#64809a;background:#eff4fa;border:1px solid #d2ddea;border-radius:6px;height:31px;font:800 10px ui-monospace,monospace}
+.blocks-workspace .block-line-number small{font-size:9px;font-weight:500;color:#7791a7}
+.blocks-workspace .block-line-number b{font-size:11px}
+.block-comment .block-line-number{height:26px}
+@media(max-height:780px) and (min-width:1091px){
+ .stage-tabs{min-height:48px!important;flex:0 0 48px!important}
+ .stage-tab{padding:5px!important}
+ .fetch-card{min-height:105px!important;padding:7px!important}
+ .fetch-rail-space{min-height:9px!important;flex-basis:9px!important}
+ .fetch-upper{min-height:37px!important}
+ .fetch-card .fetch-message{padding:4px 7px!important}
+ .decode-card{min-height:127px!important;padding:6px!important}
+ .decode-rail-junction{height:21px!important;margin:1px auto 3px!important}
+ .execute-card{min-height:120px!important;padding:7px!important}
+ .execute-main{min-height:52px!important}
+ .accumulator-box{padding:4px 7px}
+ .accumulator-box strong{font-size:clamp(23px,2vw,31px)}
+ .stage-explanation{margin-top:3px!important;padding:4px 6px!important}
+ .alu-box{margin-top:3px!important;padding:3px 7px!important}
+ .teaching-io{flex:0 0 99px!important;min-height:99px!important}
+ .teaching-flow{gap:4px!important}
+}
+@media(max-height:660px) and (min-width:1091px){
+ .fetch-card{min-height:90px!important}
+ .decode-card{min-height:118px!important}
+ .execute-card{min-height:103px!important}
+ .teaching-io{flex-basis:88px!important;min-height:88px!important}
+ .execute-main{min-height:45px!important}
+ .decode-rail-junction{height:16px!important}
+ .teaching-card{padding:5px!important}
+ .register-hint,.alu-box .MuiTypography-root:last-child{display:none}
+}
+/* During a completed cycle, rails and console are neutral too. */
+.workspace-layout:has(.cycle-status-banner) .lmc-rails-back{opacity:.42}
+.teaching-flow:has(.cycle-status-banner.completed) .teaching-io{opacity:.5;filter:grayscale(.8)}
+.teaching-flow:has(.cycle-status-banner.halted) .teaching-io{opacity:1!important;filter:none!important}
+
+/* Do not force a 630px desktop app when the available Mac window is shorter. */
+@media(min-width:1091px){.app-root{min-height:0!important}}

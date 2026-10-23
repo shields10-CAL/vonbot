@@ -1,0 +1,21 @@
+/* v0.17: progressively populated ALU worksheet and stable Accumulator highlight */
+.fetch-card .pc-display{display:grid!important;grid-template-columns:18px minmax(0,1fr) auto!important;align-items:center!important;gap:6px!important;}
+.fetch-card .pc-display>div{min-width:0!important;overflow:hidden!important;}
+.fetch-card .pc-display .register-label,.fetch-card .pc-display .register-hint{white-space:normal!important;overflow-wrap:anywhere!important;max-width:100%!important;}
+.fetch-card .pc-display>strong{grid-column:3!important;grid-row:1!important;align-self:center!important;margin:0!important;z-index:0!important;}
+.fetch-card .pc-display svg{grid-column:1!important;grid-row:1!important;}
+.accumulator-value-shell{width:min(98%,175px);min-height:44px;display:flex;align-items:center;justify-content:center;border-radius:11px;position:relative;isolation:isolate;}
+.accumulator-value-shell strong{position:relative;z-index:1;}
+.accumulator-value-shell.acc-value-updated{animation:acc-value-confirm .85s ease-out 1;}
+@keyframes acc-value-confirm{0%{background:#68ec9b;box-shadow:0 0 0 0 #30d877cc,0 0 18px #21e278;}40%{background:#c9ffdc;box-shadow:0 0 0 8px #30d8774d,0 0 26px #29d66e;}100%{background:transparent;box-shadow:none;}}
+.alu-equation{right:-6px!important;bottom:calc(100% + 11px)!important;min-width:175px;max-width:min(305px,95%)!important;white-space:nowrap!important;font-variant-numeric:tabular-nums;}
+.alu-equation-text{display:inline-flex;align-items:center;justify-content:center;gap:5px;font:850 clamp(10px,1vw,13px) ui-monospace,monospace;}
+.alu-random-equation{background:#faf4ff!important;border-color:#7947d4!important;color:#3d2183!important;}
+.alu-scramble-digits{font:900 20px ui-monospace,monospace;letter-spacing:1px;display:inline-block;min-width:60px;color:#6b26ac;}
+@media(prefers-reduced-motion:reduce){.accumulator-value-shell.acc-value-updated{animation:none;outline:3px solid #1b9e59;}}
+
+/* Physically terminate the rail at the Accumulator CARD, not the number itself. */
+.accumulator-box[data-flow-node="acc"]{position:relative;z-index:2;}
+.accumulator-value-shell{background:#fff;border:1px solid #f2daa8;}
+/* The opcode worksheet is a lightweight overlay above the ALU; rails stay behind it. */
+.alu-box .alu-equation{z-index:20!important;}

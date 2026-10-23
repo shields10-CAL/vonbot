@@ -1,0 +1,199 @@
+/* v0.21 — consolidated layout correction + accessibility remediation.
+   Keep the original VonBot palette in Default. Modes override presentation only. */
+.sr-only {position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;clip-path:inset(50%)!important}
+
+/* Fetch: prevent the counter from colliding with its label. Two equal-sized
+   cards, with a dedicated icon/label/value grid inside Program Counter. */
+.teaching-flow .fetch-card .fetch-upper {display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;align-items:stretch!important;gap:9px!important;width:100%;min-width:0!important}
+.teaching-flow .fetch-card .pc-display,
+.teaching-flow .fetch-card .control-unit {
+  box-sizing:border-box!important;width:100%!important;max-width:none!important;min-width:0!important;
+  min-height:46px!important;padding:6px 8px!important;overflow:hidden!important;
+  border:1px solid #a9cbee!important;display:grid!important;align-items:center!important;
+}
+.teaching-flow .fetch-card .pc-display {grid-template-columns:18px minmax(0,1fr) auto!important;gap:6px!important}
+.teaching-flow .fetch-card .control-unit {grid-template-columns:18px minmax(0,1fr)!important;gap:6px!important}
+.teaching-flow .fetch-card .pc-display>svg,
+.teaching-flow .fetch-card .control-unit>svg {grid-column:1!important;grid-row:1!important;max-width:18px!important;width:18px!important;height:18px!important}
+.teaching-flow .fetch-card .pc-display>.register-copy,
+.teaching-flow .fetch-card .control-unit>.register-copy {grid-column:2!important;grid-row:1!important;min-width:0!important;width:100%!important;overflow:hidden!important}
+.teaching-flow .fetch-card .pc-display .register-label,
+.teaching-flow .fetch-card .control-unit .register-label {display:block!important;max-width:100%!important;color:#184c7f!important;font-size:clamp(10px,.88vw,13px)!important;line-height:1.16!important;font-weight:850!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;overflow-wrap:normal!important}
+.teaching-flow .fetch-card .pc-display .register-hint,
+.teaching-flow .fetch-card .control-unit .register-hint {display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:2!important;line-clamp:2;max-width:100%!important;color:#48677d!important;font-size:clamp(9px,.72vw,11px)!important;line-height:1.15!important;font-weight:550!important;white-space:normal!important;overflow:hidden!important;overflow-wrap:normal!important}
+.teaching-flow .fetch-card .pc-display>.register-number {
+  grid-column:3!important;grid-row:1!important;min-width:42px!important;max-width:52px!important;
+  width:auto!important;margin:0!important;padding:3px 6px!important;align-self:center!important;
+  font:900 clamp(21px,1.85vw,30px)/1.12 ui-monospace,monospace!important;
+  letter-spacing:0!important;white-space:nowrap!important;position:relative!important;z-index:1!important;
+}
+/* Decode: allocate independent space to the top-right receiving field, fork,
+   registers, and explanation. No row is allowed to spill into Execute. */
+.teaching-flow>.decode-card {flex-basis:clamp(146px,20dvh,184px)!important;height:clamp(146px,20dvh,184px)!important;min-height:0!important;box-sizing:border-box!important;padding:8px 10px!important}
+.teaching-flow>.decode-card .decode-body {box-sizing:border-box!important;padding-top:1px!important;display:flex!important;flex-direction:column!important;height:100%!important;min-height:0!important;overflow:hidden!important}
+.teaching-flow .decode-body>.MuiStack-root:first-child {min-height:25px!important;flex:0 0 25px!important;padding-right:104px!important;gap:4px!important}
+.teaching-flow .decode-body>.MuiStack-root:first-child .MuiTypography-root {white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.teaching-flow .decode-rail-junction {height:18px!important;min-height:18px!important;flex:0 0 18px!important;margin:2px auto 4px!important}
+.teaching-flow .decode-registers {display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:6px!important;min-height:40px!important;flex:0 0 40px!important}
+.teaching-flow .decode-register {display:grid!important;grid-template-columns:18px minmax(0,1fr) auto!important;gap:4px!important;min-width:0!important;min-height:40px!important;padding:4px 5px!important;overflow:hidden!important}
+.teaching-flow .decode-register>svg {width:16px!important;height:16px!important;grid-column:1}
+.teaching-flow .decode-register>span {min-width:0!important;overflow-wrap:normal!important;white-space:normal!important;font-size:clamp(9px,.8vw,12px)!important;line-height:1.08!important}
+.teaching-flow .decode-register>strong {min-width:33px!important;max-width:76px!important;margin:0!important;padding:3px 4px!important;font-size:clamp(15px,1.25vw,20px)!important;align-self:center!important}
+.teaching-flow .decode-register>strong.binary-part {font-size:clamp(9px,.8vw,12px)!important;letter-spacing:-.04em!important}
+.teaching-flow .decode-explanation {margin:5px 0 0!important;padding:5px 7px!important;min-height:29px!important;max-height:44px!important;flex:0 0 auto!important;overflow:hidden!important;gap:7px!important}
+.teaching-flow .decode-explanation .MuiTypography-root{font-size:clamp(10px,.75vw,12px)!important;line-height:1.2!important;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden}
+.teaching-flow .decode-explanation .MuiChip-root{flex:0 0 auto}
+/* Make inset badges fit their cards at default zoom and 200% reflow. */
+.teaching-flow .decode-inbox {right:9px!important;top:8px!important;max-width:109px!important;min-width:67px!important;z-index:8!important}
+.teaching-flow .decode-inbox .encoded-word {max-width:100%}
+.teaching-flow .handoff-slot:has(.binary-word) {max-width:119px!important}
+@media(max-width:1300px){.teaching-flow .decode-body>.MuiStack-root:first-child{padding-right:92px!important}.teaching-flow .fetch-card .fetch-upper{gap:6px!important}.teaching-flow .fetch-card .pc-display,.teaching-flow .fetch-card .control-unit{padding:5px!important;gap:4px!important}}
+@media(max-height:700px) and (min-width:1091px){.teaching-flow>.decode-card{flex-basis:146px!important;height:146px!important}.teaching-flow .decode-explanation{max-height:36px!important}.teaching-flow .decode-rail-junction{min-height:13px!important;height:13px!important;flex-basis:13px!important}}
+@media(max-width:1090px){.teaching-flow>.decode-card{height:auto!important;min-height:160px!important;flex:0 0 auto!important}.teaching-flow .decode-body{overflow:visible!important}}
+
+/* Visible focus for all themes, including Colorblind and Default.
+   This applies to CodeMirror contenteditable, block sockets, RAM cells, and
+   toolbar/settings controls. It also defeats the old .cm-focused outline:none. */
+.app-root :is(button,[role="button"],[role="radio"],input,select,textarea,[tabindex],.cm-editor,.cm-content):focus-visible,
+.app-root .cm-editor.cm-focused,
+.app-root :is(.MuiSlider-thumb,.MuiToggleButton-root):focus-visible {
+  outline:3px solid #075bc2!important;outline-offset:2px!important;
+}
+.app-root[data-accessibility='high-contrast'] :is(button,[role="button"],[role="radio"],input,select,textarea,[tabindex],.cm-editor,.cm-content):focus-visible,
+.app-root[data-accessibility='high-contrast'] .cm-editor.cm-focused {outline:3px solid #ffe56b!important;outline-offset:3px!important}
+.app-root .memory-cell:focus-visible {z-index:10!important;outline-offset:3px!important}
+.app-root .input-card input:focus-visible{outline-offset:0!important}
+
+/* Colorblind mode: perceptually distinct blues / teals / oranges, with a solid,
+   dashed, dotted or double boundary as a redundant RAM category signal. */
+.app-root[data-accessibility='colorblind'] .handoff-card.phase-dimmed .decode-body,
+.app-root[data-accessibility='colorblind'] .handoff-card.phase-dimmed .execute-body {opacity:.8!important;filter:none!important}
+.app-root[data-accessibility='colorblind'] .teaching-card.phase-dimmed {opacity:.86!important;filter:none!important}
+.app-root[data-accessibility='colorblind'] .stage-tab.is-muted {opacity:1!important;background:#e5edf2!important;color:#24445d!important;border:2px solid #68869f!important;filter:none!important}
+.app-root[data-accessibility='colorblind'] .memory-cell.empty{border:2px double #94afc4!important}
+.app-root[data-accessibility='colorblind'] .memory-cell.target {outline:3px dashed #713c86!important;outline-offset:1px!important}
+.app-root[data-accessibility='colorblind'] .decode-opcode-chip{background:#006d61!important;color:#fff!important}
+.app-root[data-accessibility='colorblind'] .input-card.input-needs-value{border:3px dashed #005b90!important;box-shadow:0 0 0 3px #f8fcff,0 0 0 6px #005b90!important}
+.app-root[data-accessibility='colorblind'] .rail-base{stroke:#00558e!important;opacity:.92!important}
+.app-root[data-accessibility='colorblind'] .stage-arrow{color:#173a55!important}
+.app-root[data-accessibility='colorblind'] .fetch-card .register-hint{color:#2b536b!important}
+
+/* High contrast: strong neutral backgrounds, readable labels and borders;
+   inactive is *not* disabled and must not become light-grey text on white. */
+.app-root[data-accessibility='high-contrast'] .teaching-card.phase-dimmed,
+.app-root[data-accessibility='high-contrast'] .teaching-flow:has(.cycle-status-banner) .teaching-card,
+.app-root[data-accessibility='high-contrast'] .handoff-card.phase-dimmed .decode-body,
+.app-root[data-accessibility='high-contrast'] .handoff-card.phase-dimmed .execute-body,
+.app-root[data-accessibility='high-contrast'] .execute-body.await-command {opacity:1!important;filter:none!important}
+.app-root[data-accessibility='high-contrast'] .teaching-card.phase-dimmed {border-style:dashed!important}
+.app-root[data-accessibility='high-contrast'] .teaching-card.phase-emphasis{border-style:solid!important;border-width:3px!important;border-color:#ffe477!important}
+.app-root[data-accessibility='high-contrast'] .fetch-card .register-display,
+.app-root[data-accessibility='high-contrast'] .fetch-card .control-unit {background:#071827!important;color:#fff!important;border:2px solid #b9e0ff!important}
+.app-root[data-accessibility='high-contrast'] .fetch-card .register-label,
+.app-root[data-accessibility='high-contrast'] .fetch-card .register-hint,
+.app-root[data-accessibility='high-contrast'] .control-unit .register-label,
+.app-root[data-accessibility='high-contrast'] .control-unit .register-hint {color:#f7fbff!important}
+.app-root[data-accessibility='high-contrast'] .pc-display .register-number{background:#000b16!important;color:#fff!important;border:2px solid #ffe477!important}
+.app-root[data-accessibility='high-contrast'] .stage-tab.is-muted {opacity:1!important;filter:none!important;background:#192d42!important;color:#fff!important;border:2px dashed #a3c9ea!important}
+.app-root[data-accessibility='high-contrast'] .stage-desc,
+.app-root[data-accessibility='high-contrast'] .stage-name {color:inherit!important}
+.app-root[data-accessibility='high-contrast'] .decode-explanation,
+.app-root[data-accessibility='high-contrast'] .execute-card .execution-detail,
+.app-root[data-accessibility='high-contrast'] .fetch-message {background:#071827!important;border:2px solid #b3cee6!important;color:#fff!important}
+.app-root[data-accessibility='high-contrast'] .decode-opcode-chip{background:#002b43!important;color:#fff!important;border:2px solid #ffe477!important}
+.app-root[data-accessibility='high-contrast'] .decode-register{background:#061827!important;color:#fff!important;border:2px solid #a9c7e4!important}
+.app-root[data-accessibility='high-contrast'] .decode-register>span{color:#fff!important}
+.app-root[data-accessibility='high-contrast'] .decode-register>strong{border:1px solid #e6f5ff!important}
+.app-root[data-accessibility='high-contrast'] .accumulator-box,
+.app-root[data-accessibility='high-contrast'] .alu-box{background:#081b2f!important;color:#fff!important;border:2px solid #ffde73!important}
+.app-root[data-accessibility='high-contrast'] .accumulator-box .MuiTypography-root,
+.app-root[data-accessibility='high-contrast'] .alu-box .MuiTypography-root{color:#fff!important}
+.app-root[data-accessibility='high-contrast'] .teaching-io>.MuiCard-root,
+.app-root[data-accessibility='high-contrast'] .input-card,
+.app-root[data-accessibility='high-contrast'] .io-grid .MuiCard-root {background:#081c30!important;color:#fff!important;border:2px solid #bad9f5!important}
+.app-root[data-accessibility='high-contrast'] .io-grid .MuiTypography-root{color:#fff!important}
+.app-root[data-accessibility='high-contrast'] .io-grid .MuiInputBase-root,
+.app-root[data-accessibility='high-contrast'] .io-grid .MuiInputBase-input,
+.app-root[data-accessibility='high-contrast'] .io-grid .console {background:#000e1e!important;color:#fff!important;border-color:#bbdcff!important}
+.app-root[data-accessibility='high-contrast'] .io-grid input::placeholder{color:#d6ebfa!important;opacity:1!important}
+.app-root[data-accessibility='high-contrast'] .io-grid .MuiButton-root:disabled,
+.app-root[data-accessibility='high-contrast'] button:disabled {opacity:1!important;background:#20364d!important;border:2px dashed #bdcedd!important;color:#eef6ff!important;cursor:not-allowed}
+.app-root[data-accessibility='high-contrast'] .editor-heading,.app-root[data-accessibility='high-contrast'] .editor-heading .MuiTypography-root,
+.app-root[data-accessibility='high-contrast'] .editor-controls .MuiTypography-root {color:#fff!important}
+.app-root[data-accessibility='high-contrast'] .editor-area,.app-root[data-accessibility='high-contrast'] .lmc-code-editor,.app-root[data-accessibility='high-contrast'] .cm-editor,
+.app-root[data-accessibility='high-contrast'] .cm-gutters,.app-root[data-accessibility='high-contrast'] .cm-scroller{background:#081a2e!important;color:#fff!important}
+.app-root[data-accessibility='high-contrast'] .cm-gutters{border-right:2px solid #a9c3d8!important;color:#fff!important}
+.app-root[data-accessibility='high-contrast'] .cm-activeLine {background:#194d79!important;box-shadow:inset 3px 0 #ffe477!important}
+.app-root[data-accessibility='high-contrast'] .lmc-current-instruction{box-shadow:0 0 0 3px #ffe477!important;border-color:#ffe477!important}
+.app-root[data-accessibility='high-contrast'] .memory-cell.empty{border:2px double #d6eaff!important}
+.app-root[data-accessibility='high-contrast'] .memory-cell.code{background:#062c4e!important;border:2px solid #7fd0ff!important}
+.app-root[data-accessibility='high-contrast'] .memory-cell.dat{background:#063b35!important;border:2px dashed #90f6c6!important}
+.app-root[data-accessibility='high-contrast'] .memory-cell.data{background:#513207!important;border:2px dotted #ffe477!important}
+.app-root[data-accessibility='high-contrast'] .memory-cell .addr {color:#fff!important;opacity:1!important;font-weight:800!important}
+.app-root[data-accessibility='high-contrast'] .memory-cell.active{outline:3px solid #ffe477!important;outline-offset:1px!important}
+.app-root[data-accessibility='high-contrast'] .memory-cell.target{outline:3px dashed #f2b9ff!important}
+.app-root[data-accessibility='high-contrast'] .row-heading{color:#fff!important;font-size:12px!important}
+.app-root[data-accessibility='high-contrast'] .rail-base{stroke:#c5e3fa!important;opacity:1!important;stroke-width:5!important}
+.app-root[data-accessibility='high-contrast'] .rail-lit{stroke:#ffe477!important;filter:none!important;stroke-width:7!important}
+.app-root[data-accessibility='high-contrast'] .cycle-status-banner.completed {background:#1a3249!important;color:#fff!important;border:2px solid #b6d5f5!important}
+.app-root[data-accessibility='high-contrast'] .cycle-status-banner.completed::before{background:#fff!important;color:#07121f!important}
+.app-root[data-accessibility='high-contrast'] .blocks-overlay,.app-root[data-accessibility='high-contrast'] .blocks-topbar,.app-root[data-accessibility='high-contrast'] .blocks-layout,.app-root[data-accessibility='high-contrast'] .blocks-workspace,.app-root[data-accessibility='high-contrast'] .blocks-flyout,.app-root[data-accessibility='high-contrast'] .blocks-categories{background:#0a2034!important;color:#fff!important;border-color:#c7e1ff!important}
+.app-root[data-accessibility='high-contrast'] .blocks-topbar,.app-root[data-accessibility='high-contrast'] .blocks-title strong,
+.app-root[data-accessibility='high-contrast'] .workspace-heading,.app-root[data-accessibility='high-contrast'] .blocks-title span{color:#fff!important}
+.app-root[data-accessibility='high-contrast'] .block-stack-row input,.app-root[data-accessibility='high-contrast'] .block-comment input{background:#fff!important;color:#081525!important;border:2px solid #ffe477!important}
+.app-root[data-accessibility='high-contrast'] .block-line-number{background:#09192a!important;color:#fff!important;border-color:#b7d7fa!important}
+.app-root[data-accessibility='high-contrast'] .block-line-number small{color:#fff!important}
+
+/* 200% zoom: allow reflow and scrolling instead of clipping the CPU/cards.
+   The original compact desktop layout remains unchanged at usual zoom. */
+@media(max-width:1090px){.app-root{height:auto!important;min-height:100dvh!important;overflow:visible!important}.workspace-layout{min-height:0!important;overflow:visible!important}.middle-panel{overflow:visible!important}.teaching-flow{height:auto!important;min-height:0!important;overflow:visible!important}.teaching-flow>.fetch-card,.teaching-flow>.decode-card,.teaching-flow>.execute-card{flex:0 0 auto!important;height:auto!important;min-height:156px!important}.teaching-flow>.decode-card{min-height:166px!important}.teaching-flow>.execute-card{min-height:210px!important}.teaching-io{min-height:126px!important;flex:0 0 auto!important}.memory-scroll{max-height:70dvh;overflow:auto!important}}
+@media(max-width:690px){.teaching-flow .fetch-card .register-label{font-size:11px!important}.teaching-flow .fetch-card .register-hint{font-size:10px!important}.teaching-flow .pc-display>.register-number{min-width:39px!important;font-size:22px!important}.memory-panel{min-height:480px!important}.stage-tabs{min-height:62px!important}.teaching-flow>.decode-card{min-height:174px!important}}
+
+/* Reduced motion: no pulsing, moving highlights, or animated calculation popups.
+   The app still exposes textual status for every phase. */
+@media(prefers-reduced-motion:reduce){
+ .app-root *, .app-root *::before,.app-root *::after {animation:none!important;transition:none!important;scroll-behavior:auto!important}
+ .app-root .rail-lit{stroke-dasharray:9 7!important;filter:none!important}
+ .app-root .handoff-slot.is-loaded{outline:3px solid currentColor!important;outline-offset:2px!important}
+ .app-root .input-card.input-needs-value{outline:4px solid #7448b9!important;box-shadow:none!important}
+}
+@media(forced-colors:active){
+ .app-root .teaching-card,.app-root .memory-cell,.app-root .stage-tab,.app-root .decode-register,.app-root .handoff-slot{forced-color-adjust:auto!important;border:2px solid CanvasText!important}
+ .app-root .memory-cell.active,.app-root :focus-visible{outline:3px solid Highlight!important}
+ .app-root .memory-cell.dat{border-style:dashed!important}.app-root .memory-cell.data{border-style:dotted!important}.app-root .memory-cell.empty{border-style:double!important}
+ .app-root .rail-base,.app-root .rail-lit{stroke:CanvasText!important;opacity:1!important}
+}
+/* Material dialogs and menus render into a portal outside .app-root. Reach them
+   using :has() so the same accessibility palette applies consistently. */
+body:has(.app-root[data-accessibility='high-contrast']) .MuiDialog-paper,
+body:has(.app-root[data-accessibility='high-contrast']) .MuiMenu-paper,
+body:has(.app-root[data-accessibility='high-contrast']) .MuiPopover-paper,
+body:has(.app-root[data-accessibility='high-contrast']) .MuiAutocomplete-paper {
+ background:#101f32!important;color:#fff!important;border:2px solid #c1daf6!important;
+}
+body:has(.app-root[data-accessibility='high-contrast']) :is(.MuiDialog-paper,.MuiMenu-paper,.MuiPopover-paper) .MuiTypography-root,
+body:has(.app-root[data-accessibility='high-contrast']) :is(.MuiDialog-paper,.MuiMenu-paper) .MuiInputLabel-root,
+body:has(.app-root[data-accessibility='high-contrast']) :is(.MuiDialog-paper,.MuiMenu-paper) .MuiFormHelperText-root {color:#fff!important}
+body:has(.app-root[data-accessibility='high-contrast']) .MuiDialog-paper .MuiOutlinedInput-root {
+  color:#fff!important;background:#091828!important;border:1px solid #a7cee9!important
+}
+body:has(.app-root[data-accessibility='high-contrast']) .MuiDialog-paper :is(.MuiButton-root,.MuiMenuItem-root,.MuiToggleButton-root):focus-visible {
+  outline:3px solid #ffe477!important;outline-offset:2px!important
+}
+body:has(.app-root[data-accessibility='high-contrast']) .MuiDialog-paper .MuiAlert-root {color:#001323!important;background:#e6f4ff!important}
+body:has(.app-root[data-accessibility='colorblind']) .MuiDialog-paper .MuiButton-root:focus-visible {outline:3px solid #005a9c!important;outline-offset:2px!important}
+/* Default palette keeps its original fills, but shape/border conveys memory type. */
+.app-root[data-accessibility='default'] .memory-cell.code{border:2px solid #6594c5}
+.app-root[data-accessibility='default'] .memory-cell.dat{border:2px dashed #288b65}
+.app-root[data-accessibility='default'] .memory-cell.data{border:2px dotted #b97823}
+.app-root[data-accessibility='default'] .memory-cell.empty{border:2px double #71879a}
+.app-root[data-accessibility='default'] .memory-cell.active{outline:3px solid #e49400;outline-offset:1px}
+/* Completion's muted colors still need readable text in accessible palettes. */
+.app-root[data-accessibility='colorblind'] .teaching-flow:has(.cycle-status-banner) .teaching-card{opacity:.8!important;filter:none!important}
+.app-root[data-accessibility='colorblind'] .cycle-status-banner.completed{background:#e0eaf2;color:#273f55;border:2px solid #486b87}
+/* Inactive colors and symbols remain legible through user-requested contrast. */
+.app-root[data-accessibility='high-contrast'] .stage-arrow{color:#e6f2ff!important}
+.app-root[data-accessibility='high-contrast'] .stage-step{background:#0a1624!important;color:#fff!important;border:2px solid #a5d7ff!important}
+.app-root[data-accessibility='high-contrast'] .cycle-status-banner.halted{background:#831625!important;color:#fff!important;border:3px solid #ffb1ad!important}
+.app-root[data-accessibility='high-contrast'] .input-focus-ring{border:4px solid #ffe477!important;box-shadow:0 0 0 3px #000,0 0 0 7px #ffe477!important}
+.app-root[data-accessibility='colorblind'] .input-focus-ring{border:4px dashed #005a9c!important;box-shadow:0 0 0 3px #fff,0 0 0 7px #005a9c!important}

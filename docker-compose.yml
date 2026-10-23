@@ -1,0 +1,8 @@
+services:
+  lmc:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "${LMC_PORT:-2003}:3000"
+    environment:
+      - NODE_ENV=production

@@ -1,0 +1,52 @@
+/* VonBot 0.14 — clearer rail journeys and instructional phase boundaries. */
+.fetch-card{gap:5px!important;min-height:154px!important}
+.fetch-rail-space{min-height:32px;flex:0 0 32px;pointer-events:none}
+.fetch-upper{gap:10px;align-items:stretch!important;min-width:0}
+.fetch-card .register-display{max-width:none!important;min-width:0!important;flex:1 1 49%;padding:6px!important}
+.fetch-card .register-display>div{min-width:0}
+.fetch-card .register-label{font-size:clamp(9px,.85vw,12px)!important}
+.fetch-card .register-hint{font-size:clamp(8px,.63vw,10px)!important;white-space:normal!important}
+.fetch-card .register-display strong{font-size:clamp(20px,1.8vw,30px)!important;min-width:40px!important;padding:3px 4px!important;flex-shrink:0}
+.fetch-card .control-unit{max-width:none!important;min-width:0!important;flex:1 1 51%;padding:6px 8px!important}
+.fetch-message{padding:8px 12px!important}
+/* The rail split is a physical junction, not an extra faux UI widget. */
+.decode-rail-junction{width:12px;height:18px;margin:3px auto 6px;position:relative}
+.decode-rail-junction:after{content:"";position:absolute;left:3px;bottom:-1px;height:6px;width:6px;border-radius:50%;background:#11b77a;box-shadow:0 0 6px #17c88e}
+/* The completed instruction is a fourth, neutral teaching state. */
+.cycle-finished-notice{background:#eaf4fa;border-top:4px solid #2872a9;color:#26394b;text-align:center;font-size:13px;font-weight:800;padding:7px 10px;border-radius:7px;flex-shrink:0}
+.stages-complete .stage-tab{background:#d8dfe6!important;color:#475261!important;opacity:.6!important;filter:grayscale(1)!important;box-shadow:none!important}
+.teaching-flow:has(.stages-complete) .teaching-card{opacity:.47!important;filter:grayscale(.7)!important;box-shadow:none!important}
+.teaching-flow:has(.stages-complete) .handoff-slot{opacity:.65;box-shadow:none!important;animation:none!important}
+/* The ALU performs arithmetic on the PC. Its result, not the +1 token,
+   travels up to the Program Counter. */
+.alu-calculating{outline:2px solid #a05bea!important;box-shadow:0 0 10px #b18aff8c;animation:alu-work-pulse .75s ease-in-out infinite;flex-wrap:wrap}
+.alu-plus-one{color:#683c99;background:#fff;padding:2px 6px;border-radius:6px;font:850 12px ui-monospace,monospace;white-space:nowrap}
+@keyframes alu-work-pulse{50%{box-shadow:0 0 18px #a05bea}}
+.accumulator-box strong.random-scrambling{color:#135eb3!important;letter-spacing:.1em;filter:blur(.35px);animation:rnd-digit-jitter .12s steps(2) infinite}
+.accumulator-box strong.random-result-flash{animation:rnd-green-pulse 1s ease-out 1;background:#adf5c6;border-radius:9px}
+@keyframes rnd-digit-jitter{50%{transform:translateY(-2px)}}
+@keyframes rnd-green-pulse{0%{background:#30d27b;box-shadow:0 0 0 10px #2bf58a99;color:#06452a}100%{background:transparent;box-shadow:0 0 0 0 transparent;color:inherit}}
+/* Block links visibly follow the pointer, without interfering with inputs. */
+.block-link-wires .preview-wire{stroke:#ffaf00!important;stroke-width:4!important;stroke-dasharray:11 5;filter:drop-shadow(0 0 4px #f3bb00)}
+.block-link-wires .preview-wire-tip{fill:#ffe364;stroke:#8c5000;stroke-width:3;filter:drop-shadow(0 0 5px #ffad00)}
+.wire-connect-warning{position:sticky!important;top:7px;z-index:40!important;margin:8px 12px!important;box-shadow:0 3px 12px #e15d3f44!important}
+.wire-connect-hint{position:sticky;top:6px;background:#fff4ce;border:2px solid #d8941d;color:#654007;padding:7px 10px;border-radius:7px;font-size:12px;font-weight:800;z-index:30;pointer-events:none}
+.block-label-socket.link-target{outline:3px dashed #ffb900;outline-offset:3px}
+@media(max-height:760px) and (min-width:1091px){
+ .fetch-card{min-height:123px!important}
+ .fetch-rail-space{min-height:19px;flex-basis:19px}
+ .cycle-finished-notice{padding:3px;font-size:11px}
+}
+@media(max-width:1250px){
+ .fetch-card .register-hint{display:none}
+ .fetch-card .register-display{padding:4px!important}
+ .fetch-card .control-unit{padding:4px 5px!important}
+ .fetch-rail-space{min-height:20px;flex-basis:20px}
+}
+@media(prefers-reduced-motion:reduce){.alu-calculating,.random-scrambling,.random-result-flash{animation:none!important}}
+
+/* Keep the permanent data rails visible even inside the split area; text stays
+   above most paths while the moving tokens remain foremost. */
+.lmc-rails-back{z-index:4!important}
+.lmc-rails-back .rail-base{stroke:#6489a6;stroke-width:4;opacity:.52}
+.teaching-flow:has(.stages-complete) .teaching-io{opacity:.52;filter:grayscale(.55)}

@@ -1,0 +1,13 @@
+# VonBot 1.0.0 — Portainer deployment from GitHub Container Registry
+# Use this as the Portainer stack definition, adjusting your existing port/proxy
+# settings as needed. The original docker-compose.yml is for local builds.
+services:
+  vonbot:
+    image: ghcr.io/shields10-cal/vonbot:latest
+    pull_policy: always
+    container_name: vonbot
+    restart: unless-stopped
+    ports:
+      - "${VONBOT_PORT:-2003}:3000"
+    environment:
+      NODE_ENV: production
