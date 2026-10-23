@@ -1,3 +1,5 @@
+![VonBot — Meet Von. Your Little Computer.](docs/images/vonbot-readme-banner.png)
+
 # VonBot
 
 **Meet Von. Your Little Computer.**
