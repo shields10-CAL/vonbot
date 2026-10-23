@@ -1,164 +1,119 @@
-> **Current release: VonBot 1.0.0 (v1.0.0).** First official stable release, based on v0.22.1, including its Docker build fix.
-
 # VonBot
 
 **Meet Von. Your Little Computer.**
 
-VonBot is an open-source, local-first educational CPU simulator. It makes the **Fetch → Decode → Execute** cycle visible using illuminated data rails, real-time registers and memory, and beginner-friendly block and assembly editors.
+VonBot is a free, open-source computer simulator designed to help students understand how computers execute instructions. It makes the **fetch → decode → execute** cycle visible while students write and run programs in a simplified assembly language or a colorful block editor.
 
-VonBot is an independent project directly inspired by **Peter Higginson's [Little Man Computer](https://www.peterhigginson.co.uk/lmc/)**. It modernizes the user interface, extends the instruction set, adds block programming, and reimagines visual data flow for accessibility. The application's **Credits** dialog acknowledges the original inspiration. The original creators have not endorsed this project.
+![VonBot simulator showing the assembly editor, CPU cycle, and RAM](docs/images/vonbot-simulator.png)
 
-## Run locally
+## 1. What is VonBot?
 
-Requires Node.js **22+**.
+VonBot is a teaching tool for exploring the **Von Neumann architecture**, the idea that a computer stores both instructions and data in memory. Rather than hiding what happens inside a processor, VonBot lets students watch instructions move through the CPU and see their effects on registers, RAM, input, and output.
+
+Students can:
+- Write simple assembly programs or compose instructions using blocks.
+- Follow the **Fetch**, **Decode**, and **Execute** stages, one step at a time.
+- See the **Program Counter**, **Accumulator**, **Instruction Register**, and RAM change as a program runs.
+- Use input, output, arithmetic, memory, branching, and random-number instructions.
+- Experiment with execution speed and explore accessible color and high-contrast display modes.
+
+VonBot is an **educational model**, not a way to run programs written for a real-world CPU. Its instruction set is deliberately simplified for learning.
+
+![VonBot visual block-coding editor](docs/images/vonbot-block-editor.png)
+
+## 2. How do I install it?
+
+The easiest way to run VonBot for a classroom is with **Docker**. Docker runs the application in a container so you do not have to install Node.js or configure a web server yourself.
+
+**You'll need:** a computer or server with Docker installed, network access for downloading the image, and a web browser. Portainer is optional, but convenient if you prefer a graphical interface.
+
+### Option A — Portainer (recommended for classroom servers)
+
+1. Open Portainer, choose your Docker environment, then go to **Stacks → Add stack**.
+2. Name your stack `vonbot`.
+3. Choose **Web editor** and paste the following configuration:
+
+```yaml
+services:
+  vonbot:
+    image: ghcr.io/shields10-cal/vonbot:latest
+    pull_policy: always
+    restart: unless-stopped
+    ports:
+      - "2003:3000"
+    environment:
+      NODE_ENV: production
+```
+
+4. Select **Deploy the stack**. Portainer downloads the image and starts VonBot.
+5. Visit **http://YOUR_SERVER_IP:2003**, replacing `YOUR_SERVER_IP` with the IP address of your Docker server. If using Docker on your own computer, visit **http://localhost:2003**.
+
+**Using a different port:** change only the first number in `"2003:3000"`; for example, `"8080:3000"` makes the simulator available on port 8080.
+
+**Updating VonBot:** changes to this repository are built into a Docker image automatically, but they **do not deploy to your classroom automatically**. When you want an update, open the stack in Portainer, choose **Editor → Update the stack**, and ensure the latest image is pulled. Verify the simulator after redeploying.
+
+### Option B — Docker command line
+
+On a computer with Docker installed, run:
 
 ```bash
-npm install
-npm run dev
+docker run -d --name vonbot --restart unless-stopped -p 2003:3000 ghcr.io/shields10-cal/vonbot:latest
 ```
 
-Open `http://localhost:5173`.
+Then open **http://localhost:2003** (or use the Docker server's IP address on another device).
+
+To update a command-line installation, pull the latest image, stop and remove the existing container, and repeat the run command:
 
 ```bash
-npm test        # Vitest regression suite
-npm run build   # TypeScript and Vite production build
-npm start       # Express serves dist/ on port 3000
+docker pull ghcr.io/shields10-cal/vonbot:latest
+docker stop vonbot
+docker rm vonbot
+docker run -d --name vonbot --restart unless-stopped -p 2003:3000 ghcr.io/shields10-cal/vonbot:latest
 ```
 
-## Docker / Portainer
+**Deployment notes:** VonBot requires no database, sign-in, or student accounts. Individual projects are automatically saved **in each browser**; they are not synchronized across devices. Students should save a copy of important programs using the Project menu before clearing browser data, switching devices, or using shared computers. The server health endpoint is `/api/health`.
 
-```bash
-cp .env.example .env
-docker compose up -d --build
-```
+## 3. How do I use it?
 
-Default host port **2003**, container port **3000**. Change `LMC_PORT` in `.env` to avoid conflict with other classroom services. The old Compose service name and port variable are retained so upgrades do not create orphaned services. The health endpoint is `/api/health`.
+Start by entering a short assembly program in the **Assembly Editor**, or switch to **Blocks** to build the same program visually. Choose **Assemble into RAM** to load the instructions into the simulated computer.
 
-The simulator has **no database or authentication**; projects are saved in the browser or explicitly saved as `.vasm` source. Do not put student PII in shareable project URLs.
-
-## Features
-
-- **Code editor:** a Format assembly button, syntax highlighting, labels (`START:`), meaningful opcode autocomplete, comments and `.ORG`.
-- **Block editor:** colored drag-and-drop blocks, a Basic → COMMENT block, an off-by-default inline-comment toggle, movable standalone comments, editable label sockets, live mouse-following branch wires (Esc/Backspace cancels), and RAM addresses draggable into operands. Connecting a branch requires a labeled destination. Execution is disabled while Blocks is open.
-- **CPU visualization:** color-coded Fetch / Decode / Execute phases, phase-level `Step`, instant `Back` (no reverse animation), and mid-transfer Pause/Resume alongside Stop, active-instruction highlighting, and value-labeled moving orbs. Fetch takes the Program Counter to the Control Unit and RAM; Decode branches to opcode/address registers; Execute transfers values to the Accumulator and uses the Arithmetic Unit for all arithmetic, including Program Counter +1. Input focus and red Halt begin only after the command has arrived and finished its Execute transition. Completing a non-halt instruction dims the stages until the next step.
-- **RAM:** selectable 8/16/32/64 addresses, instruction/DAT/runtime-data classification and live occupied-RAM percentage with a green (<60%), yellow (60–84%) or red (85%+) progress bar. An occupied `DAT 0` address counts as used. `DEC` shows two colored decimal pairs, and `BIN` shows the same pairs as separate **7-bit** binary values (00–99).
-- **Input and output:** numeric input 0000–9999, number output, character output using ASCII.
-- **Execution speed:** continuously adjustable slider, even during active motion, with linear velocity from 115 to 1440 pixels/second. At maximum, **Turbo** pulses the speed panel red and skips orb animation for faster execution. Pausing freezes the current transfer without advancing its data or CPU phase.
-- **Accessibility:** Simulator Settings with mutually exclusive Default, Colorblind and High Contrast palettes; preferences persist locally.
-- **RND:** a new time-based seed on each run by default, or a manual seed set in Settings. Execute visibly scrambles digits for one second before delivering the CPU-generated result and briefly highlighting it green.
-- **Project menu:** new, rename, automatic browser saving, `.vasm` text save/load (legacy `.lmc` import supported), no JSON project export, shareable URL.
-- **Header:** VonBot robot/chip mark; Commands dialog covering the current instruction set; Credits dialog with original attribution. No Sandbox/LMC branding in the main workspace.
-
-## Four-digit decimal encoding
-
-Instructions use `OOAA`: a **two-digit opcode** and **two-digit operand** (address or immediate). Memory stores values `0000–9999`. The 13 executable commands are:
-
-| Code | Mnemonic | Purpose |
-|---|---|---|
-| 00 | HLT | Halt |
-| 01 | ADD | Add contents of RAM address |
-| 02 | SUB | Subtract contents of RAM address |
-| 03 | STA | Store Accumulator to RAM address |
-| 04 | LDA | Load RAM address into Accumulator |
-| 05 | BRA | Unconditional branch |
-| 06 | BRZ | Branch when Accumulator is zero |
-| 07 | BRP | Branch when borrow/negative flag is clear |
-| 08 | LDI | Load immediate value 00–99 |
-| 09 | RND | Random value 00–99 |
-| 10 | INP | Read user input |
-| 11 | OUT | Output Accumulator as decimal |
-| 12 | OUTC | Output an ASCII character |
-
-`DAT` (allocate/initialize data) and `.ORG` (set assembly origin) are assembler directives, **not executable opcodes**. Opcode values 13–19 are reserved. Example: `ADD 07` assembles to `0107`; `INP` assembles to `1000`. Assembly source files from classic simulators may be reassembled when the mnemonics are supported, but old **three-digit machine-code words are not compatible**.
-
-## Developer architecture
-
-```text
-src/core/assembler.ts        Four-digit encoding, labels, assembler, decoder
-src/core/machine.ts          Pure CPU state transitions and input/output
-src/core/flowModel.ts        Data-transfer plans for animations
-src/core/ramUsage.ts         Occupied memory and color thresholds
-src/core/liveSpeed.ts        Continuous speed adjustments during motion
-src/core/wordFormat.ts       4-digit decimal / paired 7-bit display formatting
-src/core/project.ts          Browser project persistence, imports/exports
-src/data/instructions.ts     Command descriptions shared by UI components
-src/components/             Code, blocks, data flow, RAM, Commands, Credits, branding
-src/styles/                 Material-based theme and responsive CSS
-server/index.mjs            Minimal Express server and health endpoint
-tests/                      CPU, assembler, animation, history, VonBot tests
-```
-
-The instruction execution engine is isolated from React, so the visualizer does not change CPU semantics. See `docs/ARCHITECTURE.md` and `CONTRIBUTING.md` for implementation details. The custom robot/chip icon is an editable SVG; no proprietary font or generated binary logo asset is required.
-
-## Upgrading from v0.11
-
-Existing browser projects use the same localStorage key and Project schema. Prior 100-address saved projects migrate to 64 addresses and 36-address projects to 32. **Programs that reference addresses 64–99 will no longer assemble** in the new configurations; save a backup of your `.vasm` source before upgrading and revise absolute addresses (symbolic labels usually need no changes). RAM capacity changes are refused with a warning when source cannot fit. The four-digit machine instruction format remains unchanged. Binary is a **display option**, not a change to execution arithmetic or memory-word width. Appearance/display settings are stored separately in the browser. See `CHANGELOG.md` for release history.
-
-## Verification
-
-Run `npm test && npm run build` before deployment. Pure core checks and TypeScript/TSX syntax checks were run while packaging v0.14, but **a full npm-backed React production build/browser render could not be completed in this environment**. Verify layout, popup controls and the memory meter in a local browser before classroom release.
-
-MIT licensed; see `LICENSE` and `CONTRIBUTING.md`.
-
-
-## Version 0.13 instructional flow and block controls
-
-- **Fetch:** Control Unit reads the Program Counter, visits the selected RAM address, and delivers the still-encoded four-digit word to Decode. The instruction mnemonic is not revealed yet.
-- **Decode:** The encoded word branches into the two-digit opcode and two-digit operand registers. The mnemonic is shown inside Decode only; it is delivered to Execute at the beginning of the following Step.
-- **Execute:** The receiving command illuminates first; operand movements update the accumulator, RAM, and output when their traveling tokens arrive. Arithmetic shows both inputs entering the Arithmetic Unit, then its result returning to the accumulator. The Program Counter +1 is routed through the Arithmetic Unit.
-- **Input focus:** Four translucent screen scrims leave Input unobstructed and usable, with a glowing ring while `INP` waits.
-- **Self-modifying code:** Assembling a `STA` directed at an executable instruction displays a non-blocking warning with the source line and address.
-- **Block editor:** Branch blocks have a connector. Drag it onto a target label connector, or click a branch connector and then a target label. The connected operand is written as the label; code remains shareable and editable. `.ORG` was removed from the block toolbox while existing assembly directives continue to parse. The former Extended category is now Random.
-- **Editor:** Pressing Enter after a labeled instruction automatically aligns the next instruction under the opcode column, and block-to-code serialization aligns labeled listings.
-- **Halt:** All phase tabs turn red, and Step/Run are disabled until Reset or reassembly. Back remains available.
-
-The CPU core maintains its pure-state execution API; animations are a separate presentation layer. The browser rendering still requires verification by running `npm install`, `npm test`, and `npm run build` on a network-enabled machine.
-
-
-## Version 0.15 notes
-
-Save a standalone source program using **Project → Save program (.vasm)**. This format is normal text containing VonBot assembly, not a JSON archive. Load it using **Project → Load program (.vasm)**. Previously saved `.lmc`, `.asm`, or `.txt` mnemonic files can still be imported. The earlier JSON project-export command was removed; local browser autosaving and copyable share URLs remain available.
-
-The CPU has three pedagogical stages: Fetch, Decode, Execute. After Execute, a neutral completion banner replaces the phase ribbon; `HLT` displays a red banner. The arithmetic display shows the operands and result of ADD, SUB and Program Counter increment. Block Mode shows both source lines and resolved memory addresses (including differences caused by comments or `.ORG` in imported source). Appearance modes are under **Settings → Accessibility appearance**.
-
-The layout uses responsive height rules for laptop screens; check at 1280×720 and 1440×900. The new SVG junction geometry and rail animation still need a browser check on the target machine.
-
-### Executing DAT (important teaching note)
-
-`DAT` places a four-digit word in RAM. RAM does not carry a runtime code/data
-tag: any word reached by the Program Counter is decoded. Because opcode `00`
-means `HLT`, `DAT 20` stores `0020`, which halts if it is fetched as an
-instruction (the remaining two digits are ignored for HLT). The assembler
-warns about unintended fall-through into data; it does not skip DAT or
-secretly insert instructions. Preferred source structure:
+For example, this program asks for two numbers and outputs their sum:
 
 ```asm
-        LDA VALUE
+        INP
+        STA FIRST
+        INP
+        ADD FIRST
+        OUT
         HLT
-VALUE:  DAT 20
+
+FIRST:  DAT 0
 ```
 
-### Accessibility (v0.21)
+- **Step** advances through the CPU's operations so students can observe what happens in each stage.
+- **Run** executes the program continuously. Adjust **Speed** to slow down or speed up the visualization.
+- **RAM** shows stored instructions and data. Watch the **Program Counter** identify the next instruction and the **Accumulator** hold working values.
+- **Input** accepts numbers requested by `INP`; **Output** displays results from output instructions.
+- **Blocks** provides a visual way to explore commands before moving to text-based assembly.
 
-Settings offers exclusive **Default**, **Colorblind** and **High Contrast** appearances, saved per browser. High Contrast also uses color-independent distinctions. RAM types have different borders, the CPU announces phases as text, CodeMirror highlighting changes with appearance, and keyboard focus is outlined. The simulator honors the operating system's **Reduce Motion** preference and supports keyboard movement of focused instruction/comment blocks with **Alt+Up / Alt+Down**. See [docs/ACCESSIBILITY.md](docs/ACCESSIBILITY.md) for audit scope, contrast samples and remaining hands-on testing.
+Use **Project** to save or load program files. Use the **?** button in the simulator to find the available commands. For first-time learners, stepping through a short program is often more useful than immediately pressing Run.
 
-## GitHub releases and Portainer deployment (VonBot 1.0.0)
+## 4. How can I use this with students?
 
-The GitHub Actions workflow `.github/workflows/docker.yml` publishes an image to
-`ghcr.io/shields10-cal/vonbot:latest` whenever code is pushed to `main`.
-Pushing an annotated version tag such as `v1.0.0` also publishes image tag `1.0.0`.
+VonBot is intentionally an **open-ended sandbox**: there is no single prescribed lesson, sequence, or correct project. Students can start with adding two numbers and progress to comparisons, branches, loops, reusable data locations, and more complex programs as their understanding grows.
 
-The existing `docker-compose.yml` builds locally and preserves the current
-port 2003. For the simplest Portainer-managed release workflow, use
-`docker-compose.portainer.yml` as the **stack configuration** instead. Keep
-your current Portainer networking/proxy/port settings if they differ.
+A useful classroom progression is to have students **predict** what an instruction will do, **step** through the fetch–decode–execute process, **observe** changes to the CPU and RAM, and then **explain** why the result occurred. You can also ask students to construct a program using blocks and compare it with the equivalent assembly text.
 
-1. Push the source to GitHub's `main` branch.
-2. In GitHub Actions, confirm **Publish VonBot Docker Image** succeeded.
-3. Make the GHCR package public or configure Portainer registry credentials.
-4. In Portainer use the `docker-compose.portainer.yml` configuration and deploy.
-5. For updates, push changes and after the Action succeeds click **Update the stack**,
-   ensuring the latest image is pulled before redeployment.
+The goal is to add **ready-to-use classroom labs and teacher resources to this repository**. Teachers who would like existing lab materials or want to share suggestions can contact **[shields10@calcharter.org](mailto:shields10@calcharter.org)**.
 
-For a rollback, use a pinned image, e.g. `ghcr.io/shields10-cal/vonbot:1.0.0`.
-Keep tagged versions in GHCR.
+For classroom deployment, consider testing the server address from a student device before the lesson. Since work is stored in the browser, students should export or save important work rather than relying exclusively on automatic browser storage.
+
+## 5. Credits
+
+**VonBot was created by Tobin Shields** as an educational tool for teaching computer architecture and introductory assembly programming.
+
+The project was inspired by **Peter Higginson's [Little Man Computer (LMC)](https://www.peterhigginson.co.uk/lmc/)**, which has helped learners explore how computers execute instructions. VonBot builds on that educational inspiration with a different interface, visual fetch–decode–execute simulation, an extended simplified instruction set, and block-based programming.
+
+**VonBot is an independent project and is not affiliated with, sponsored by, or endorsed by Peter Higginson or the Little Man Computer project.**
+
+VonBot is distributed under the [MIT License](LICENSE).
